@@ -1,0 +1,11 @@
+{
+  "name": "pomodoro-colletivo",
+  "version": "0.0.1",
+  "description": "A multi-user / real-time pomodoro for teams.",
+  "dependencies": {
+    "body-parser": "^1.13.3",
+    "express": "^4.13.3",
+    "mongoose": "^4.1.5",
+    "morgan": "^1.6.1"
+  }
+}

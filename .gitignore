@@ -1,0 +1,10 @@
+# idea projects
+.idea
+*.iml
+
+# node and bower dependencies
+node_modules
+client/assets/bower
+
+# mac crappy indexers
+.DS_Store
