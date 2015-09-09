@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="pomodoroApp" ng-strict-di>
+<head>
+    <meta charset="UTF-8">
+    <title>Pomodoro Collettivo</title>
+</head>
+<body>
+    
+    <div ng-controller="MainController as vmMain">
+        {{vmMain.message}}
+    </div>
+    
+    <script src="bower_components/angular/angular.js" type="text/javascript"></script>
+    <script src="bower_components/momentjs/min/moment.min.js" type="text/javascript"></script>
+    <script src="bower_components/momentjs/min/locales.min.js" type="text/javascript"></script>
+    <script src="bower_components/humanize-duration/humanize-duration.js" type="text/javascript"></script>
+    <script src="bower_components/angular-timer/dist/angular-timer.min.js" type="text/javascript"></script>
+
+    <script src="app.js" type="text/javascript"></script>
+</body>
+</html>
