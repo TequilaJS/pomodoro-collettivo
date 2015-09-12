@@ -1,5 +1,3 @@
 (function(){
-    angular.module("app", [
-
-    ])
+    angular.module("pomodoro", ['timer']);
 })();

@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="pomodoro">
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title>Pomodoro Collettivo</title>
 </head>
 <body>
+    
+    <div ng-controller="MainController as vmMain">
+        <h1>{{vmMain.greeting}}</h1>
+    </div>
+    
+
+    <script src="assets/bower/angular/angular.js"></script>
+    <script src="assets/bower/angular-timer/dist/angular-timer.js"></script>
+    <script src="app/app.module.js"></script>
+    <script src="app/main.controller.js"></script>
 
 </body>
 </html>
