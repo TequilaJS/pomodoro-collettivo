@@ -1,5 +1,5 @@
 /**
-*		Pomodoro colletivo
+*		Pomodoro collettivo
 *		server/config.js
 *
 *		Expose some configuration parameters in a separate module

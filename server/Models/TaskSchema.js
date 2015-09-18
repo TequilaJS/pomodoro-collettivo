@@ -1,8 +1,16 @@
+/**
+*		Pomodoro collettivo
+*		server/Modles/TaskSchema.js
+*
+*		DB schema for tasks - mongoose based
+*/
+"use strict";
+
 var mongoose 	= require('mongoose');
 var Schema		= mongoose.Schema;
 
 var TaskSchema = new Schema({
-    name: String,
+    title: String,
     description: String,
 	assigneeId: Number,
     pomodoroTicks: Number
