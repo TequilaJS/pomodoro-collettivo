@@ -16,9 +16,9 @@ var mongoose 	= require( "mongoose" );
 var morgan		= require( "morgan" );
 
 // other init params
-var cors		= require("./server/cors");
+var cors	= require("./server/cors");
 var config  = require("./server/config");
-
+var api		= require("./server/api");
 // config and init of middleware modules
 mongoose.connect(config.database.url + config.database.collection);
 server.use( bodyParser.urlencoded( { extended : true } ) );
@@ -27,7 +27,7 @@ server.use( morgan("dev") );
 server.use( cors );
 
 // calling api and defining static served content
-
+api(server);
 server.use( "/", express.static ( __dirname + "/client" ) );
 
 // telling our server to listen on the specified ports
