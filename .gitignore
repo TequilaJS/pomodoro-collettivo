@@ -12,3 +12,6 @@ client/assets/bower
 
 # mac crappy indexers
 .DS_Store
+
+# vscode projects
+.vscode
