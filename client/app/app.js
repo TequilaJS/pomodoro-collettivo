@@ -1,32 +1,34 @@
 (function() {
     'use strict';
 
-    angular.module('pomodoro', ['ui.router', 'timer']);
+    angular.module('pomodoro', ['ui.router', 'timer', 'ct.ui.router.extras']);
 
     angular
         .module('pomodoro')
         .config(configure);
 
-    configure.$inject = ['$stateProvider', '$urlRouterProvider' /*, '$locationProvider'*/];
+    configure.$inject = ['$stateProvider', '$urlRouterProvider'/*, '$stickyStateProvider' , '$locationProvider'*/ ];
 
-    function configure($stateProvider, $urlRouterProvider /*, $locationProvider*/) {
+    function configure($stateProvider, $urlRouterProvider/*, $stickyStateProvider , $locationProvider*/ ) {
 
-        $urlRouterProvider.otherwise('/list');
-
+        $urlRouterProvider.otherwise('/');
+        // $stickyStateProvider.enableDebug(true);
         $stateProvider
-            .state('list', {
-                url: '/list',
-                templateUrl: 'app/list/list.template.html',
-                controller: 'ListController',
-                controllerAs: 'vmList'
-            })
-            .state('countdown', {
-                url: '/countdown',
-                templateUrl: 'app/countdown/countdown.template.html',
-                controller: 'CountdownController',
-                controllerAs: 'vmCountdown'
+            .state('/', {
+                url: '/',
+                views: {
+                    'list': {
+                        templateUrl: 'app/list/list.template.html',
+                        controller: 'ListController',
+                        controllerAs: 'vmList'        
+                    },
+                    'countdown': {
+                        templateUrl: 'app/countdown/countdown.template.html',
+                        controller: 'CountdownController',
+                        controllerAs: 'vmCountdown',
+                    }
+                }
             });
-
         // $locationProvider.html5Mode(true);
     }
 })();

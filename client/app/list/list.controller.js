@@ -5,9 +5,9 @@
         .module('pomodoro')
         .controller('ListController', ListController);
 
-    ListController.$inject = [];
+    ListController.$inject = ['countdownStatus'];
 
-    function ListController() {
+    function ListController(countdownStatus) {
         var vmList = this;
         vmList.title = 'ListController';
 

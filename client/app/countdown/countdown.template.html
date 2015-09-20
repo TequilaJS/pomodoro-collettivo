@@ -2,5 +2,13 @@
 {{vmCountdown.message}}
 <br>
 <h3>
-    <timer interval="1000" countdown="1500">{{minutes}}:{{seconds}}</timer>
+    <timer  interval="1000"
+            countdown="vmCountdown.pomodoroDuration"
+            auto-start="false"
+            finish-callback="vmCountdown.ring()">{{minutes}}:{{seconds}} or {{countdown}} seconds total.</timer>
 </h3>
+
+<audio src="../../assets/sounds/kitchen_timer_counts_down.mp3"></audio>
+<input type="text" ng-model="vmCountdown.noreset">{{vmCountdown.noreset}}
+<button ng-click="vmCountdown.startTimer()">Start</button>
+<button ng-click="vmCountdown.stopTimer()">Stop</button>

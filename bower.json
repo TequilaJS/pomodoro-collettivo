@@ -11,5 +11,8 @@
     "humanize-duration": "~3.3.0",
     "Materialize": "materialize#~0.97.0",
     "moment": "~2.10.6"
+  },
+  "devDependencies": {
+    "ui-router-extras": "~0.0.14"
   }
 }
