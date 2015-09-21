@@ -7,16 +7,19 @@
 
     MainController.$inject = [];
 
-    /* @ngInject */
     function MainController() {
         var vmMain = this;
-        vmMain.greeting = 'Hello Pomodoro!';
+        vmMain.title = 'MainController';
+
+        vmMain.display = display;
 
         activate();
 
-        ////////////////
-
         function activate() {
+            vmMain.displayView = 'list';
+        }
+        function display(view) {
+            vmMain.displayView = view;
         }
     }
 })();

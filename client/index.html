@@ -3,18 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <title>Pomodoro Collettivo</title>
+  <base href="/">
 </head>
-<body>
+<body ng-controller="MainController as vmMain">
     
-    <div ng-controller="MainController as vmMain">
-        <h1>{{vmMain.greeting}}</h1>
-    </div>
-    
+    <a href="" ng-click="vmMain.display('list')">List</a>
+    <a href="" ng-click="vmMain.display('countdown')">Timer</a>
+
+    <div ui-view="list" ng-show="vmMain.displayView === 'list'"></div>
+    <div ui-view="countdown" ng-show="vmMain.displayView === 'countdown'"></div>
 
     <script src="assets/bower/angular/angular.js"></script>
-    <script src="assets/bower/angular-timer/dist/angular-timer.js"></script>
-    <script src="app/app.module.js"></script>
+    <script src="assets/bower/momentjs/moment.js"></script>
+    <script src="assets/bower/humanize-duration/humanize-duration.js"></script>
+    <script src="assets/bower/angular-timer/dist/angular-timer.min.js"></script>
+    <script src="assets/bower/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="assets/bower/ui-router-extras/release/ct-ui-router-extras.js"></script>
+    <script src="app/app.js"></script>
     <script src="app/main.controller.js"></script>
+    <script src="app/list/list.controller.js"></script>
+    <script src="app/countdown/countdown.controller.js"></script>
+    <script src="app/countdownStatus.service.js"></script>
 
 </body>
 </html>
