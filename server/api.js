@@ -37,7 +37,7 @@ module.exports = function(app){
 
 			task.title 			= req.body.title;
 			task.description 	= req.body.description;
-			task.assigneeId 	= req.body.asigneeId;
+			task.assigneeId 	= req.body.assigneeId;
 			task.pomodoroTicks 	= req.body.pomodoroTicks;
 			
 			task.save( function ( error ) {
@@ -46,9 +46,12 @@ module.exports = function(app){
 				}
 				res.json( { message:'Contact successfully created!' } )
 			});        
-		})
-	
-	router.route( "/task/:task_id" ){
+		});
+
+	/**
+	 * /task/:task_id
+	 */
+	router.route( "/task/:task_id" )
 		// get a single task by id
 		.get(function(req,res) {
 			Task.findById(req.params.task_id, function(err, task){
@@ -58,11 +61,10 @@ module.exports = function(app){
 		})
 		
 		// update a task by id
-		.put(function(){
+		.put(function(req,res){
 			Task.findById(req.params.task_id, function(err, task){
 				if (err) res.send(err);
-				
-				
+
 				task.title = req.body.title;
 				task.description = req.body.description;
 				task.assingeeId = req.body.assingeeId;
@@ -76,12 +78,14 @@ module.exports = function(app){
 			});
 		})
 		
-		.delete(function(){
-			Task.findById(req.params.task_id, function(err,task){
+		.delete(function(req,res){
+			Task.remove({
+				_id : req.params.task_id
+			}, function(err,task){
 				if (err) res.send(err);
+				res.json({message:"Task deleted"});
 			})
 		})
-	}
-        
-    app.use('/api', router);
+	app.use('/api', router);
+
 }

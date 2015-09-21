@@ -2,6 +2,15 @@
   "name": "pomodoro-colletivo",
   "version": "0.0.1",
   "description": "A multi-user / real-time pomodoro for teams.",
+  "licenses":{
+    "type":"Apache-2.0",
+    "url":"http://opensource.org/licenses/apache2.0.php"
+  },
+  "repository":{
+    "type":"git",
+    "url":"https://github.com/TequilaJS/pomodoro-collettivo.git"
+  },
+
   "dependencies": {
     "body-parser": "^1.13.3",
     "express": "^4.13.3",
