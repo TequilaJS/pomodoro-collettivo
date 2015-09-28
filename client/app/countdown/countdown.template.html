@@ -14,6 +14,7 @@
 <button type="button" ng-click="vmCountdown.shutUpAlarm()">Shut down the alarm!</button>
 <label for="tickerSound">Mute ticker.
     <input id="tickerSound" 
-            type="checkbox" 
+            type="checkbox"
+            ng-model="vmCountdown.tickerMuted"
             ng-change="vmCountdown.toggleTickerMute()"/>
 </label>

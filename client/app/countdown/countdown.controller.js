@@ -5,9 +5,9 @@
         .module('pomodoro')
         .controller('CountdownController', CountdownController);
 
-    CountdownController.$inject = ['$scope'];
+    CountdownController.$inject = ['$scope', '$timeout'];
 
-    function CountdownController($scope) {
+    function CountdownController($scope, $timeout) {
         var vmCountdown = this,
             sounds = {
                 ringer: null,
@@ -20,7 +20,7 @@
         vmCountdown.shutUpAlarm = shutUpAlarm;
         vmCountdown.startTimer = startTimer;
         vmCountdown.stopTimer = stopTimer;
-        vmCountdown.tickerMuted = false;
+        vmCountdown.toggleTickerMute = toggleTickerMute;
 
         //duration of the pomodoro in seconds
         // vmCountdown.pomodoroDuration = 1500;
@@ -32,11 +32,13 @@
         //duration of long breaks in seconds
         vmCountdown.longBreakDuration = 900;
 
+        vmCountdown.alarmDuration = 3000;
+
         activate();
 
         function activate() {
             initSounds();
-
+            console.log('vmCountdown.tickerMuted', vmCountdown.tickerMuted);
             sounds.ticker.muted = vmCountdown.tickerMuted;
         }
 
@@ -51,6 +53,11 @@
         function ringAlarm() {
             stopTicker();
             sounds.ringer.play();
+
+            // will auto shut down the alarm after 3 seconds
+            $timeout(function() {
+               shutUpAlarm();
+            }, vmCountdown.alarmDuration);
         }
 
         function shutUpAlarm() {
@@ -67,7 +74,7 @@
         }
 
         function startTimer() {
-             document.getElementsByTagName('timer')[0].start();
+            document.getElementsByTagName('timer')[0].start();
 
             // in case the alarm is on
             shutUpAlarm();
@@ -80,5 +87,11 @@
             // in case the alarm is on
             shutUpAlarm();
         }
+
+        function toggleTickerMute() {
+            console.log('ticker:', vmCountdown.tickerMuted);
+            sounds.ticker.muted = vmCountdown.tickerMuted;
+        }
+
     }
 })();
