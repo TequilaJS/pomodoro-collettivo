@@ -20,6 +20,7 @@
         vmCountdown.stopTimer = stopTimer;
         vmCountdown.toggleTickerMute = toggleTickerMute;
 
+
         //duration of the pomodoro in seconds
         // vmCountdown.pomodoroDuration = 1500;
         vmCountdown.pomodoroDuration = 5;
@@ -40,6 +41,7 @@
 
             vmCountdown.elapsedPomodoros = 0;
             vmCountdown.currentTimer = 'pomodoro';
+            vmCountdown.isTicking = false;
 
             initSounds();
             sounds.ticker.muted = vmCountdown.tickerMuted;
@@ -64,7 +66,7 @@
                 switch (vmCountdown.currentTimer) {
                     case 'pomodoro':
                         if (vmCountdown.elapsedPomodoros % 4 === 0) {
-                            vmCountdown.currentTimer = 'shortBreak';    
+                            vmCountdown.currentTimer = 'shortBreak';
                         } else {
                             vmCountdown.currentTimer = 'longBreak';
                         }
@@ -103,6 +105,7 @@
             // in case the alarm is on
             shutUpAlarm();
             playTicker();
+            vmCountdown.isTicking = true;
         }
 
         function stopTimer() {
@@ -110,6 +113,9 @@
             stopTicker();
             // in case the alarm is on
             shutUpAlarm();
+            
+            vmCountdown.isTicking = false;
+            vmCountdown.currentTimer = 'pomodoro';
         }
 
         function toggleTickerMute() {
