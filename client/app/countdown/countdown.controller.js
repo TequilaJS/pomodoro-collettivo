@@ -5,9 +5,9 @@
         .module('pomodoro')
         .controller('CountdownController', CountdownController);
 
-    CountdownController.$inject = ['$scope', '$timeout'];
+    CountdownController.$inject = ['$timeout'];
 
-    function CountdownController($scope, $timeout) {
+    function CountdownController($timeout) {
         var vmCountdown = this,
             sounds = {
                 ringer: null,
