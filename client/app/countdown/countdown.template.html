@@ -1,23 +1,35 @@
 <p>This is the template for the countdown timer.</p>
-<br>
-<h3>
-    <timer  interval="1000"
-            countdown="vmCountdown[vmCountdown.currentTimer + 'Duration']"
-            auto-start="false"
-            finish-callback="vmCountdown.ringAlarm()">{{minutes}}:{{seconds}} or {{countdown}} seconds total.</timer>
-</h3>
 
 Currently timing on: {{vmCountdown.currentTimer}}
 <br>
 Elapsed pomodoros: {{vmCountdown.elapsedPomodoros}}
-<button type="button" ng-click="vmCountdown.startTimer()">Start</button>
-<button type="button" ng-click="vmCountdown.stopTimer()">Stop</button>
 <button type="button" ng-click="vmCountdown.shutUpAlarm()">Shut down the alarm!</button>
-<label for="tickerSound">Mute ticker.
-    <input id="tickerSound" 
+
+<input id="tickerSound" 
             type="checkbox"
             ng-model="vmCountdown.tickerMuted"
             ng-change="vmCountdown.toggleTickerMute()"/>
-</label>
+<label for="tickerSound">Mute ticker.</label>
 
- <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+ <button type="button" class="btn-floating btn-large waves-effect waves red">
+ 	<i 	ng-if="!vmCountdown.isTicking" 
+ 		ng-click="vmCountdown.startTimer()" 
+ 		class="material-icons">play_arrow</i>
+ 	<i 	ng-if="vmCountdown.isTicking"  
+ 		ng-click="vmCountdown.stopTimer()" 
+ 		class="material-icons">stop</i>
+ </button>
+
+		<timer  interval="1000"
+            	countdown="vmCountdown[vmCountdown.currentTimer + 'Duration']"
+            	auto-start="false"
+            	finish-callback="vmCountdown.ringAlarm()">{{minutes}}:{{sseconds}}</timer>
+    </div>
+    <div
+        round-progress
+        max="vmCountdown[vmCountdown.currentTimer + 'Duration']"
+        current="vmCountdown.elapsedTime">
+
+	</div>
+	vmCountdown.elapsedTime {{vmCountdown.elapsedTime}}
+</div>

@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module('pomodoro', ['ui.router', 'timer']);
+    angular.module('pomodoro', ['ui.router', 'timer', 'angular-svg-round-progress']);
 
     angular
         .module('pomodoro')
