@@ -1,14 +1,15 @@
 <p>This is the template for the countdown timer.</p>
-{{vmCountdown.message}}
 <br>
 <h3>
     <timer  interval="1000"
-            countdown="vmCountdown.pomodoroDuration"
+            countdown="vmCountdown[vmCountdown.currentTimer + 'Duration']"
             auto-start="false"
             finish-callback="vmCountdown.ringAlarm()">{{minutes}}:{{seconds}} or {{countdown}} seconds total.</timer>
 </h3>
 
-<input type="text" ng-model="vmCountdown.noreset">{{vmCountdown.noreset}}
+Currently timing on: {{vmCountdown.currentTimer}}
+<br>
+Elapsed pomodoros: {{vmCountdown.elapsedPomodoros}}
 <button type="button" ng-click="vmCountdown.startTimer()">Start</button>
 <button type="button" ng-click="vmCountdown.stopTimer()">Stop</button>
 <button type="button" ng-click="vmCountdown.shutUpAlarm()">Shut down the alarm!</button>

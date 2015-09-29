@@ -14,8 +14,6 @@
                 ticker: null
             };
 
-        vmCountdown.message = 'Hello from the countdown controller!';
-
         vmCountdown.ringAlarm = ringAlarm;
         vmCountdown.shutUpAlarm = shutUpAlarm;
         vmCountdown.startTimer = startTimer;
@@ -27,22 +25,27 @@
         vmCountdown.pomodoroDuration = 5;
 
         //duration of short breaks in seconds 
-        vmCountdown.shortBreakDuration = 300;
+        // vmCountdown.shortBreakDuration = 300;
+        vmCountdown.shortBreakDuration = 3;
 
         //duration of long breaks in seconds
-        vmCountdown.longBreakDuration = 900;
+        // vmCountdown.longBreakDuration = 900;
+        vmCountdown.longBreakDuration = 1;
 
         vmCountdown.alarmDuration = 3000;
 
         activate();
 
         function activate() {
+
+            vmCountdown.elapsedPomodoros = 0;
+            vmCountdown.currentTimer = 'pomodoro';
+
             initSounds();
-            console.log('vmCountdown.tickerMuted', vmCountdown.tickerMuted);
             sounds.ticker.muted = vmCountdown.tickerMuted;
         }
 
-        function initSounds(){
+        function initSounds() {
             sounds.ticker = new Audio('../../assets/sounds/kitchen_timer_counts_down.mp3');
             sounds.ringer = new Audio('../../assets/sounds/ring.ogg');
 
@@ -54,9 +57,30 @@
             stopTicker();
             sounds.ringer.play();
 
-            // will auto shut down the alarm after 3 seconds
+            // will auto shut down the alarm after n seconds
             $timeout(function() {
-               shutUpAlarm();
+                shutUpAlarm();
+
+                switch (vmCountdown.currentTimer) {
+                    case 'pomodoro':
+                        if (vmCountdown.elapsedPomodoros % 4 === 0) {
+                            vmCountdown.currentTimer = 'shortBreak';    
+                        } else {
+                            vmCountdown.currentTimer = 'longBreak';
+                        }
+                        vmCountdown.elapsedPomodoros++;
+                        break;
+                    case 'shortBreak':
+                        vmCountdown.currentTimer = 'pomodoro';
+                        break;
+                    case 'longBreak':
+                        vmCountdown.currentTimer = 'pomodoro';
+                        break;
+                }
+
+                startTimer();
+                
+
             }, vmCountdown.alarmDuration);
         }
 
@@ -89,7 +113,6 @@
         }
 
         function toggleTickerMute() {
-            console.log('ticker:', vmCountdown.tickerMuted);
             sounds.ticker.muted = vmCountdown.tickerMuted;
         }
 
