@@ -17,6 +17,7 @@
     "mongoose": "^4.1.5",
     "morgan": "^1.6.1"
   },
+
   "scripts":{
   	"install":"bower install"
   }
