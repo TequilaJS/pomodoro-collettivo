@@ -1,14 +1,23 @@
 <p>This is the template for the countdown timer.</p>
-{{vmCountdown.message}}
 <br>
 <h3>
     <timer  interval="1000"
-            countdown="vmCountdown.pomodoroDuration"
+            countdown="vmCountdown[vmCountdown.currentTimer + 'Duration']"
             auto-start="false"
-            finish-callback="vmCountdown.ring()">{{minutes}}:{{seconds}} or {{countdown}} seconds total.</timer>
+            finish-callback="vmCountdown.ringAlarm()">{{minutes}}:{{seconds}} or {{countdown}} seconds total.</timer>
 </h3>
 
-<audio src="../../assets/sounds/kitchen_timer_counts_down.mp3"></audio>
-<input type="text" ng-model="vmCountdown.noreset">{{vmCountdown.noreset}}
-<button ng-click="vmCountdown.startTimer()">Start</button>
-<button ng-click="vmCountdown.stopTimer()">Stop</button>
+Currently timing on: {{vmCountdown.currentTimer}}
+<br>
+Elapsed pomodoros: {{vmCountdown.elapsedPomodoros}}
+<button type="button" ng-click="vmCountdown.startTimer()">Start</button>
+<button type="button" ng-click="vmCountdown.stopTimer()">Stop</button>
+<button type="button" ng-click="vmCountdown.shutUpAlarm()">Shut down the alarm!</button>
+<label for="tickerSound">Mute ticker.
+    <input id="tickerSound" 
+            type="checkbox"
+            ng-model="vmCountdown.tickerMuted"
+            ng-change="vmCountdown.toggleTickerMute()"/>
+</label>
+
+ <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
