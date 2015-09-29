@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module('pomodoro', ['ui.router', 'timer', 'ct.ui.router.extras']);
+    angular.module('pomodoro', ['ui.router', 'timer']);
 
     angular
         .module('pomodoro')
