@@ -5,9 +5,9 @@
         .module('pomodoro')
         .controller('CountdownController', CountdownController);
 
-    CountdownController.$inject = ['$timeout'];
+    CountdownController.$inject = ['$scope', '$timeout'];
 
-    function CountdownController($timeout) {
+    function CountdownController($scope, $timeout) {
         var vmCountdown = this,
             sounds = {
                 ringer: null,
@@ -20,20 +20,19 @@
         vmCountdown.stopTimer = stopTimer;
         vmCountdown.toggleTickerMute = toggleTickerMute;
 
-
         //duration of the pomodoro in seconds
         // vmCountdown.pomodoroDuration = 1500;
-        vmCountdown.pomodoroDuration = 5;
+        vmCountdown.pomodoroDuration = 10;
 
         //duration of short breaks in seconds 
         // vmCountdown.shortBreakDuration = 300;
-        vmCountdown.shortBreakDuration = 3;
+        vmCountdown.shortBreakDuration = 4;
 
         //duration of long breaks in seconds
         // vmCountdown.longBreakDuration = 900;
-        vmCountdown.longBreakDuration = 1;
+        vmCountdown.longBreakDuration = 6;
 
-        vmCountdown.alarmDuration = 3000;
+        vmCountdown.alarmDuration = 3;
 
         activate();
 
@@ -43,8 +42,21 @@
             vmCountdown.currentTimer = 'pomodoro';
             vmCountdown.isTicking = false;
 
+            vmCountdown.elapsedTime = 0;
+
             initSounds();
             sounds.ticker.muted = vmCountdown.tickerMuted;
+
+            // This is ugly, I gotta say :(
+            $scope.$on('timer-tick', function(event, value){
+              
+                $timeout(function(){
+                    vmCountdown.elapsedTime = vmCountdown[vmCountdown.currentTimer + 'Duration'] - (value.millis / 1000);
+                    $scope.$apply();    
+                },0);
+
+                
+            });
         }
 
         function initSounds() {
@@ -62,13 +74,14 @@
             // will auto shut down the alarm after n seconds
             $timeout(function() {
                 shutUpAlarm();
+            }, vmCountdown.alarmDuration);
 
-                switch (vmCountdown.currentTimer) {
+             switch (vmCountdown.currentTimer) {
                     case 'pomodoro':
-                        if (vmCountdown.elapsedPomodoros % 4 === 0) {
-                            vmCountdown.currentTimer = 'shortBreak';
-                        } else {
+                        if (vmCountdown.elapsedPomodoros > 0 && vmCountdown.elapsedPomodoros % 3 === 0) {
                             vmCountdown.currentTimer = 'longBreak';
+                        } else {
+                            vmCountdown.currentTimer = 'shortBreak';
                         }
                         vmCountdown.elapsedPomodoros++;
                         break;
@@ -79,11 +92,8 @@
                         vmCountdown.currentTimer = 'pomodoro';
                         break;
                 }
-
-                startTimer();
-                
-
-            }, vmCountdown.alarmDuration);
+            $scope.$apply(); // update the current timer key for the timer to use
+            startTimer();
         }
 
         function shutUpAlarm() {
@@ -113,9 +123,10 @@
             stopTicker();
             // in case the alarm is on
             shutUpAlarm();
-            
+
             vmCountdown.isTicking = false;
             vmCountdown.currentTimer = 'pomodoro';
+            vmCountdown.elapsedPomodoros = 0;
         }
 
         function toggleTickerMute() {
