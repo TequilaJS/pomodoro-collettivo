@@ -35,13 +35,16 @@
             };
 
         // Methods
-        vmCountdown.countdown_types = countdown_types;
         vmCountdown.ringAlarm = ringAlarm;
         vmCountdown.shutUpAlarm = shutUpAlarm;
         vmCountdown.startTimer = startTimer;
         vmCountdown.stopTimer = stopTimer;
         vmCountdown.toggleTickerMute = toggleTickerMute;
 
+        // Properties
+        vmCountdown.countdown_types = countdown_types;
+
+        /* Init function*/
         (function activate() {
 
             vmCountdown.alarmDuration = 2000;
@@ -56,7 +59,6 @@
 
             // This is ugly, I gotta say :(
             $scope.$on('timer-tick', function(event, value) {
-
                 $timeout(function() {
                     vmCountdown.elapsedTime = vmCountdown.currentTimer.duration - (value.millis / 1000);
                     $scope.$apply();
