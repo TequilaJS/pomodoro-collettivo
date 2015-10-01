@@ -12,14 +12,19 @@
         vmMain.title = 'MainController';
 
         vmMain.display = display;
+        vmMain.currentTask = "Current task name goes here.";
 
         activate();
 
         function activate() {
-            vmMain.displayView = 'list';
+            vmMain.displayView = 'countdown';
         }
         function display(view) {
             vmMain.displayView = view;
+        }
+
+        function setCurrentTask(task) {
+            vmMain.currentTask = task;
         }
     }
 })();

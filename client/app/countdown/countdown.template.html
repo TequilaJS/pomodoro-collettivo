@@ -1,35 +1,71 @@
-<p>This is the template for the countdown timer.</p>
-
-Currently timing on: {{vmCountdown.currentTimer}}
-<br>
-Elapsed pomodoros: {{vmCountdown.elapsedPomodoros}}
-<button type="button" ng-click="vmCountdown.shutUpAlarm()">Shut down the alarm!</button>
-
-<input id="tickerSound" 
-            type="checkbox"
-            ng-model="vmCountdown.tickerMuted"
-            ng-change="vmCountdown.toggleTickerMute()"/>
-<label for="tickerSound">Mute ticker.</label>
-
- <button type="button" class="btn-floating btn-large waves-effect waves red">
- 	<i 	ng-if="!vmCountdown.isTicking" 
- 		ng-click="vmCountdown.startTimer()" 
- 		class="material-icons">play_arrow</i>
- 	<i 	ng-if="vmCountdown.isTicking"  
- 		ng-click="vmCountdown.stopTimer()" 
- 		class="material-icons">stop</i>
- </button>
-
-		<timer  interval="1000"
-            	countdown="vmCountdown[vmCountdown.currentTimer + 'Duration']"
-            	auto-start="false"
-            	finish-callback="vmCountdown.ringAlarm()">{{minutes}}:{{sseconds}}</timer>
-    </div>
-    <div
-        round-progress
-        max="vmCountdown[vmCountdown.currentTimer + 'Duration']"
-        current="vmCountdown.elapsedTime">
-
+<div class="container">
+	
+	<div class="row card-panel red darken-4">
+		<h3 class="center-align white-text">{{vmMain.currentTask}}</h3>
+        <div
+            class="right-align"
+            round-progress
+            max="vmCountdown.currentTimer.duration"
+            current="vmCountdown.elapsedTime"
+            radius="20"
+            bgcolor="#b71c1c"
+            color="{{vmCountdown.currentTimer.color}}"
+            stroke="4"
+            >
+        </div>
 	</div>
-	vmCountdown.elapsedTime {{vmCountdown.elapsedTime}}
+
+	<div class="row card-panel white valign-wrapper">
+		<div class="col l6 s6">
+			<h6 class="valign center-align">Currently timing on: {{vmCountdown.currentTimer.name}}</h6>
+		</div>
+		<div class="col l6 s6">
+			<h6 class="valign center-align">Elapsed pomodoros: {{vmCountdown.elapsedPomodoros}}</h6>
+		</div>
+	</div>
+	
+	<div class="center-align">
+
+		<button type="button" class="btn-floating btn-large waves-effect waves red">
+		 	<i 	ng-if="!vmCountdown.isTicking" 
+		 		ng-click="vmCountdown.startTimer()" 
+		 		class="material-icons">play_arrow</i>
+		 	<i 	ng-if="vmCountdown.isTicking"  
+		 		ng-click="vmCountdown.stopTimer()" 
+		 		class="material-icons">stop</i>
+		</button>
+		
+		<div class="switch">
+			<span class="black-text">Ticker sound:</span>
+		    <label>
+		      Off
+		      <input 	id="tickerSound" 
+		        		type="checkbox"
+		        		ng-model="vmCountdown.tickerSoundOn"
+		        		ng-change="vmCountdown.toggleTickerMute()">		
+		      <span class="lever"></span>
+		      On
+		    </label>
+	  	</div>
+	</div>
+	
+	<div class="row card-panel white valign-wrapper progress-wrapper">
+		
+		<div class="valign center-align progress-text">
+			<!-- vmCountdown.elapsedTime {{vmCountdown.elapsedTime}} -->
+			<timer  interval="1000"
+           	countdown="vmCountdown.currentTimer.duration"
+           	auto-start="false"
+           	finish-callback="vmCountdown.ringAlarm()">{{mminutes}}:{{sseconds}}</timer>
+		</div>
+		<div
+        	round-progress
+        	max="vmCountdown.currentTimer.duration"
+        	current="vmCountdown.elapsedTime"
+        	responsive="true"
+        	color="{{vmCountdown.currentTimer.color}}"
+        	>
+		</div>
+	</div>
 </div>
+

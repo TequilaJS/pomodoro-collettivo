@@ -1,11 +1,37 @@
 .progress-wrapper{
-            position: relative;
-            margin:20px auto;
-            font-size: 40px;
-        }
-        .progress{
-            position: absolute;
-            color: #bbb;
-            font-weight: 100;
-            line-height: 1;
-        }
+    position: relative;
+    margin:20px auto;
+}
+
+.progress-text {
+    position: absolute;
+    color: #999;
+    font-weight: 100;
+    line-height: 1;
+    top: 50%;
+    bottom: auto;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+
+    transition: font 0.3s;
+}
+
+.progress-text span {
+     font-size: 4em;
+}
+
+path {
+    transition: stroke 0.4s;
+}
+
+@media (min-width: 460px) { 
+    .progress-text span {
+        font-size: 7em;
+    }
+}
+
+@media (min-width: 640px) { 
+    .progress-text span {
+        font-size: 9em;
+    }
+}
