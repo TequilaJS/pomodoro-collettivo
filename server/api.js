@@ -14,8 +14,10 @@ module.exports = function(app){
     
     // adding alert middleware to let us know requests are happening
     router.use(function(req,res,next){
+        console.log(req);
+        console.log(res);
         console.log('Something is happening in our API');
-        next();
+		next();
     });
     
     // Defining the tasks api
