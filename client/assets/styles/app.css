@@ -9,3 +9,19 @@
             font-weight: 100;
             line-height: 1;
         }
+
+
+/* task list styles */
+
+#tasklist-view a {
+	cursor: pointer;
+		
+}
+
+#tasklist-view a i.material-icons {
+	transition: all 0.5s;
+}
+
+#tasklist-view a i.material-icons:hover {
+	color: red;
+}

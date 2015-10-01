@@ -1,18 +1,37 @@
-<div class="section">
-    <h2></h2>
+<div class="container" id="tasklist-view">
+	
+	
+	<ul class="collection with-header">
+		<li class="collection-header">To Do</li>
+		<li class="collection-item" ng-repeat="task in vmList.tasks" >
+			<div>
+				<input type="checkbox" id="task_{{$id}}_1" />
+      			<label for="task_{{$id}}_1">{{task.title}}</label>						
+				<span class="task-description">{{task.description}}</span>
+				<a ng-click="vmList.deleteTask(task._id)" class="secondary-content"><i class="material-icons">remove</i></a>
+				<a ng-click="" class="secondary-content"><i class="material-icons">edit</i></a>
+				
+			</div>                
+		</li>
+	</ul>
+	<div class="right-align">
+		<a ng-click="" class="secondary-content"><i class="material-icons">add</i></a>	
+	</div>
+	
+	<hr>
+	
+	<ul class="collection with-header">
+		<li class="collection-header">Done</li>
+		<li class="collection-item" ng-repeat="task in vmList.tasks" ng-if="task.status == '1'">
+			<div>
+				<input type="checkbox" id="task_{{$id}}_1" />
+      			<label for="task_{{$id}}_1">{{task.title}}</label>						
+				<span class="task-description">{{task.description}}</span>
+				<a ng-click="vmList.deleteTask(task._id)" class="secondary-content"><i class="material-icons">remove</i></a>
+				<a ng-click="" class="secondary-content"><i class="material-icons">edit</i></a>
+				
+			</div>                
+		</li>
+	</ul>
+	
 </div>
-
-<div class="collection">
-    <ul class="collection-item" ng-repeat="task in vmList.tasks">
-        <task
-                title="{{task.title}}"
-                description="{{task.description}}"
-                assigneeId="{{task.assigneeId}}"
-                pomodoroTicks="{{task.pomodoroTicks}}"
-                taskIndex = "'5'"
-                >
-
-        </task>
-    </ul>
-</div>
-
