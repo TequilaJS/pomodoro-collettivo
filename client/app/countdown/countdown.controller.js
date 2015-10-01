@@ -12,52 +12,54 @@
             sounds = {
                 ringer: null,
                 ticker: null
+            },
+            countdown_types = {
+                POMODORO: {
+                    name: 'Pomodoro',
+                    duration: 15
+                        // duration: 1500   
+                },
+                SHORT_BREAK: {
+                    name: 'Short Break',
+                    duration: 4
+                        // duration: 300   
+                },
+                LONG_BREAK: {
+                    name: 'Long Break',
+                    duration: 10
+                        // duration: 900   
+                },
             };
 
+        // Methods
+        vmCountdown.countdown_types = countdown_types;
         vmCountdown.ringAlarm = ringAlarm;
         vmCountdown.shutUpAlarm = shutUpAlarm;
         vmCountdown.startTimer = startTimer;
         vmCountdown.stopTimer = stopTimer;
         vmCountdown.toggleTickerMute = toggleTickerMute;
 
-        //duration of the pomodoro in seconds
-        // vmCountdown.pomodoroDuration = 1500;
-        vmCountdown.pomodoroDuration = 10;
+        (function activate() {
 
-        //duration of short breaks in seconds 
-        // vmCountdown.shortBreakDuration = 300;
-        vmCountdown.shortBreakDuration = 4;
-
-        //duration of long breaks in seconds
-        // vmCountdown.longBreakDuration = 900;
-        vmCountdown.longBreakDuration = 6;
-
-        vmCountdown.alarmDuration = 3;
-
-        activate();
-
-        function activate() {
-
+            vmCountdown.alarmDuration = 2000;
+            vmCountdown.currentTimer = countdown_types.POMODORO;
             vmCountdown.elapsedPomodoros = 0;
-            vmCountdown.currentTimer = 'pomodoro';
-            vmCountdown.isTicking = false;
-
             vmCountdown.elapsedTime = 0;
+            vmCountdown.isTicking = false;
+            vmCountdown.tickerSoundOn = true;
 
             initSounds();
-            sounds.ticker.muted = vmCountdown.tickerMuted;
+            sounds.ticker.muted = !vmCountdown.tickerSoundOn;
 
             // This is ugly, I gotta say :(
-            $scope.$on('timer-tick', function(event, value){
-              
-                $timeout(function(){
-                    vmCountdown.elapsedTime = vmCountdown[vmCountdown.currentTimer + 'Duration'] - (value.millis / 1000);
-                    $scope.$apply();    
-                },0);
+            $scope.$on('timer-tick', function(event, value) {
 
-                
+                $timeout(function() {
+                    vmCountdown.elapsedTime = vmCountdown.currentTimer.duration - (value.millis / 1000);
+                    $scope.$apply();
+                }, 0);
             });
-        }
+        })();
 
         function initSounds() {
             sounds.ticker = new Audio('../../assets/sounds/kitchen_timer_counts_down.mp3');
@@ -67,46 +69,38 @@
             sounds.ringer.loop = true;
         }
 
-        function ringAlarm() {
-            stopTicker();
-            sounds.ringer.play();
-
-            // will auto shut down the alarm after n seconds
-            $timeout(function() {
-                shutUpAlarm();
-            }, vmCountdown.alarmDuration);
-
-             switch (vmCountdown.currentTimer) {
-                    case 'pomodoro':
-                        if (vmCountdown.elapsedPomodoros > 0 && vmCountdown.elapsedPomodoros % 3 === 0) {
-                            vmCountdown.currentTimer = 'longBreak';
-                        } else {
-                            vmCountdown.currentTimer = 'shortBreak';
-                        }
-                        vmCountdown.elapsedPomodoros++;
-                        break;
-                    case 'shortBreak':
-                        vmCountdown.currentTimer = 'pomodoro';
-                        break;
-                    case 'longBreak':
-                        vmCountdown.currentTimer = 'pomodoro';
-                        break;
-                }
-            $scope.$apply(); // update the current timer key for the timer to use
-            startTimer();
-        }
-
-        function shutUpAlarm() {
-            sounds.ringer.pause();
-            sounds.ringer.load();
-        }
-
         function playTicker() {
             sounds.ticker.play();
         }
 
-        function stopTicker() {
-            sounds.ticker.pause();
+        function ringAlarm() {
+            stopTicker();
+            sounds.ringer.play();
+
+            if (vmCountdown.currentTimer === countdown_types.POMODORO) {
+                if (vmCountdown.elapsedPomodoros > 0 && vmCountdown.elapsedPomodoros % 3 === 0) {
+                    vmCountdown.currentTimer = countdown_types.LONG_BREAK;
+                } else {
+                    vmCountdown.currentTimer = countdown_types.SHORT_BREAK;
+                }
+                vmCountdown.elapsedPomodoros++;
+            } else {
+                vmCountdown.currentTimer = countdown_types.POMODORO;
+            }
+
+            $scope.$apply(); // update the current timer key for the timer to use
+
+            // will auto shut down the alarm after n seconds
+            $timeout(function() {
+                shutUpAlarm();
+                startTimer();
+            }, vmCountdown.alarmDuration);
+
+        }
+
+        function shutUpAlarm() {
+            sounds.currentTime = 0;
+            sounds.ringer.pause();
         }
 
         function startTimer() {
@@ -118,6 +112,10 @@
             vmCountdown.isTicking = true;
         }
 
+        function stopTicker() {
+            sounds.ticker.pause();
+        }
+
         function stopTimer() {
             document.getElementsByTagName('timer')[0].reset();
             stopTicker();
@@ -125,12 +123,12 @@
             shutUpAlarm();
 
             vmCountdown.isTicking = false;
-            vmCountdown.currentTimer = 'pomodoro';
+            vmCountdown.currentTimer = countdown_types.POMODORO;
             vmCountdown.elapsedPomodoros = 0;
         }
 
         function toggleTickerMute() {
-            sounds.ticker.muted = vmCountdown.tickerMuted;
+            sounds.ticker.muted = !vmCountdown.tickerSoundOn;
         }
 
     }
