@@ -13,7 +13,8 @@ var TaskSchema = new Schema({
     title: String,
     description: String,
 	assigneeId: Number,
-    pomodoroTicks: Number
+    pomodoroTicks: Number,
+	status: Number
 });
 
 //Export schema so it can be used where it is needed

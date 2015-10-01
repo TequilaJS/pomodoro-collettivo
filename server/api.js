@@ -13,9 +13,7 @@ module.exports = function(app){
     var router = express.Router();
     
     // adding alert middleware to let us know requests are happening
-    router.use(function(req,res,next){
-        console.log(req);
-        console.log(res);
+    router.use(function(req,res,next){       
         console.log('Something is happening in our API');
 		next();
     });
@@ -25,11 +23,11 @@ module.exports = function(app){
 	router.route("/tasks")
 	
 		.get(function(req, res){
-        	Task.find(function(error, contacts){
+        	Task.find(function(error, tasks){
             	if (error) {
-                	res.send("An error ocurred");
+                	res.send("Resource not allowed");
             	}
-            	res.json(contacts);
+            	res.json(tasks);
         	})
 		})
 	
@@ -41,12 +39,16 @@ module.exports = function(app){
 			task.description 	= req.body.description;
 			task.assigneeId 	= req.body.assigneeId;
 			task.pomodoroTicks 	= req.body.pomodoroTicks;
+			task.status 		= req.body.status;
 			
 			task.save( function ( error ) {
 				if ( error ) {
 					res.send ( 'Resource not allowed' )
 				}
-				res.json( { message:'Contact successfully created!' } )
+				Task.find(function(err, tasks){
+					if (err) res.send(err);
+					res.json(tasks);
+				})
 			});        
 		});
 
@@ -71,11 +73,15 @@ module.exports = function(app){
 				task.description = req.body.description;
 				task.assingeeId = req.body.assingeeId;
 				task.pomodoroTicks = req.body.pomodoroTicks;
+				task.status = req.body.status;
 				
 				task.save(function(err){
 					if (err) res.send(err);
 					
-					res.json ({message: "Task updated"})
+					Task.find(function(err, tasks){
+						if (err) res.send(err);
+						res.json(tasks);
+					})
 				})
 			});
 		})
@@ -85,7 +91,11 @@ module.exports = function(app){
 				_id : req.params.task_id
 			}, function(err,task){
 				if (err) res.send(err);
-				res.json({message:"Task deleted"});
+				
+				Task.find(function(err, tasks){
+					if (err) res.send(err);
+					res.json(tasks);
+				})
 			})
 		})
 	app.use('/api', router);
