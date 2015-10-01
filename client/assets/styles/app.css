@@ -14,3 +14,7 @@
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
 }
+
+path {
+    transition: stroke 0.4s;
+}

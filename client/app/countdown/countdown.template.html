@@ -1,7 +1,18 @@
 <div class="container">
 	
-	<div class="row card-panel red">
+	<div class="row card-panel red darken-4">
 		<h3 class="center-align white-text">{{vmMain.currentTask}}</h3>
+        <div
+            class="right-align"
+            round-progress
+            max="vmCountdown.currentTimer.duration"
+            current="vmCountdown.elapsedTime"
+            radius="20"
+            bgcolor="#b71c1c"
+            color="{{vmCountdown.currentTimer.color}}"
+            stroke="4"
+            >
+        </div>
 	</div>
 
 	<div class="row card-panel white valign-wrapper">
@@ -52,7 +63,7 @@
         	max="vmCountdown.currentTimer.duration"
         	current="vmCountdown.elapsedTime"
         	responsive="true"
-        	color="#f44336"
+        	color="{{vmCountdown.currentTimer.color}}"
         	>
 		</div>
 	</div>
