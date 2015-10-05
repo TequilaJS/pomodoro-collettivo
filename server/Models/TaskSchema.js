@@ -12,8 +12,6 @@ var Schema		= mongoose.Schema;
 var TaskSchema = new Schema({
     title: String,
     description: String,
-	assigneeId: Number,
-    pomodoroTicks: Number,
 	status: Number
 });
 
