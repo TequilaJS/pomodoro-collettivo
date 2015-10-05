@@ -24,8 +24,8 @@
 		<li class="collection-header">Done</li>
 		<li class="collection-item" ng-repeat="task in vmList.tasks" ng-if="task.status == '1'">
 			<div>
-				<input type="checkbox" id="task_{{$id}}_1" />
-      			<label for="task_{{$id}}_1">{{task.title}}</label>						
+				<input type="checkbox" id="done_{{$id}}_1" />
+      			<label for="done_{{$id}}_1">{{task.title}}</label>
 				<span class="task-description">{{task.description}}</span>
 				<a ng-click="vmList.deleteTask(task._id)" class="secondary-content"><i class="material-icons">remove</i></a>
 				<a ng-click="" class="secondary-content"><i class="material-icons">edit</i></a>
