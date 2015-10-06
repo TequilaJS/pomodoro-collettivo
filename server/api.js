@@ -21,7 +21,7 @@ module.exports = function(app){
     // Defining the tasks api
 	
 	router.route("/tasks")
-	
+		// get all tasks
 		.get(function(req, res){
         	Task.find(function(error, tasks){
             	if (error) {
@@ -31,14 +31,12 @@ module.exports = function(app){
         	})
 		})
 	
-	//insert a task to the database
+		//insert a task to the database
 		.post(function(req,res){
 			var task = new Task;
 
 			task.title 			= req.body.title;
 			task.description 	= req.body.description;
-			task.assigneeId 	= req.body.assigneeId;
-			task.pomodoroTicks 	= req.body.pomodoroTicks;
 			task.status 		= req.body.status;
 			
 			task.save( function ( error ) {
@@ -71,8 +69,6 @@ module.exports = function(app){
 
 				task.title = req.body.title;
 				task.description = req.body.description;
-				task.assingeeId = req.body.assingeeId;
-				task.pomodoroTicks = req.body.pomodoroTicks;
 				task.status = req.body.status;
 				
 				task.save(function(err){
@@ -97,7 +93,7 @@ module.exports = function(app){
 					res.json(tasks);
 				})
 			})
-		})
+		});
 	app.use('/api', router);
 
-}
+};
