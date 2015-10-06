@@ -1,21 +1,12 @@
-.progress-wrapper{
-            position: relative;
-            margin:20px auto;
-            font-size: 40px;
-        }
-        .progress{
-            position: absolute;
-            color: #bbb;
-            font-weight: 100;
-            line-height: 1;
-        }
-
+body {
+    user-select: none;
+    -webkit-user-select: none;
+}
 
 /* task list styles */
 
 #tasklist-view a {
 	cursor: pointer;
-		
 }
 
 #tasklist-view a i.material-icons {
@@ -24,22 +15,26 @@
 
 #tasklist-view a i.material-icons:hover {
 	color: red;
-}
     position: relative;
     margin:20px auto;
 }
 
+.progress-wrapper {
+    position: relative;
+    margin: 20px auto;
+    max-width: 450px;
+}
+
 .progress-text {
+    bottom: auto;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    transition: font 0.3s;
     position: absolute;
     color: #999;
     font-weight: 100;
     line-height: 1;
     top: 50%;
-    bottom: auto;
-    left: 50%;
-    transform: translateY(-50%) translateX(-50%);
-
-    transition: font 0.3s;
 }
 
 .progress-text span {
@@ -60,4 +55,8 @@ path {
     .progress-text span {
         font-size: 9em;
     }
+}
+
+#mini-progress {
+    padding-top: 10px;
 }

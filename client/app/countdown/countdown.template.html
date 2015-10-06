@@ -1,13 +1,16 @@
 <div class="container">
 	
-	<div class="row card-panel red darken-4">
-		<h3 class="center-align white-text">{{vmMain.currentTask}}</h3>
+	<div class="row card-panel red darken-4 valign-wrapper">
+		<div class="col l10 s10 valign center-align">
+			<h4 class="white-text">{{vmMain.currentTask}}</h4>
+		</div>
         <div
-            class="right-align"
+        	id="mini-progress"
+        	class="col l2 s2 right-align valign"
             round-progress
             max="vmCountdown.currentTimer.duration"
             current="vmCountdown.elapsedTime"
-            radius="20"
+            radius="30"
             bgcolor="#b71c1c"
             color="{{vmCountdown.currentTimer.color}}"
             stroke="4"
@@ -16,11 +19,12 @@
 	</div>
 
 	<div class="row card-panel white valign-wrapper">
-		<div class="col l6 s6">
-			<h6 class="valign center-align">Currently timing on: {{vmCountdown.currentTimer.name}}</h6>
+		<div class="col l6 s6 center-align">
+			<h6>Currently timing on: {{vmCountdown.currentTimer.name}}</h6>
 		</div>
-		<div class="col l6 s6">
-			<h6 class="valign center-align">Elapsed pomodoros: {{vmCountdown.elapsedPomodoros}}</h6>
+		<div class="col l6 s6 right-align">
+				<img src="../../assets/svg/pomodoro.svg" alt="">
+				<p class="right" style="font-size: 1.3em;"> &times; {{vmCountdown.elapsedPomodoros}}</p>
 		</div>
 	</div>
 	
