@@ -11,7 +11,8 @@
         var vmList = this;
 
         vmList.tasks = [];		
-		vmList.task = {};		
+		vmList.task = {};
+		vmList.isAddingTask = false;
 
         $http({
             method: "GET",
@@ -48,19 +49,38 @@
 			return tasks;			
 		}
 		
-		vmList.updateTask = function(id){						
-						
+		vmList.createTask = function(){
 			$http({
 				method: "POST",
-				url: "/api/task/"+id,
-				data: task
+				url: "/api/tasks/",
+				data: vmList.task
 			}).then(function success (res) {				
 				vmList.tasks = res.data;
+				vmList.task = {};
 			}, function error (res){
 				console.log(res);
 			});
-		}
-		
+		};
+
+		vmList.checkTask = function(task){
+			console.log("updating a task");
+			//var taskStatus = task.status ? 1 : 0;
+			$http({
+				method: "PUT",
+				url: "/api/task/"+task._id,
+				data: {
+					title:task.title,
+					description: task.description,
+					status: task.status
+				}
+			}).then(function success (res) {
+				vmList.tasks = res.data;
+				vmList.task = {};
+			}, function error (res){
+				console.log(res);
+			});
+		};
+
         vmList.title = 'ListController';
 
         vmList.message = 'Hello from the list controller!';

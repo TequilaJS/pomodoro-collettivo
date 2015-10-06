@@ -12,7 +12,7 @@ var Schema		= mongoose.Schema;
 var TaskSchema = new Schema({
     title: String,
     description: String,
-	status: Number
+	status: Boolean
 });
 
 //Export schema so it can be used where it is needed
