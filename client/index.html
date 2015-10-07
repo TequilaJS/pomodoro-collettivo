@@ -18,14 +18,16 @@
         <div class="row">
             <div class="col s12">
                 <ul class="tabs">
-                    <li class="tab col s3"><a class="teal-text lighten-1" href="" ng-click="vmMain.display('list')">List</a></li>
-                    <li class="tab col s3"><a class="teal-text lighten-1" href="" ng-click="vmMain.display('countdown')">Timer</a></li>
+                    <li class="tab col s3"><a ng-class="{'active': vmMain.displayView === 'list'}" class="teal-text lighten-1" href="" ng-click="vmMain.display('list')">List</a></li>
+                    <li class="tab col s3"><a ng-class="{'active': vmMain.displayView === 'countdown'}"class="teal-text lighten-1 active" href="" ng-click="vmMain.display('countdown')">Timer</a></li>
                 </ul>
             </div>
             <div id="test1" class="col s12"><div ui-view="list" ng-show="vmMain.displayView === 'list'"></div></div>
             <div id="test2" class="col s12"><div ui-view="countdown" ng-show="vmMain.displayView === 'countdown'"></div></div>
         </div>
-        
+  
+        <about></about>
+
         <!--Import jQuery before materialize.js-->
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script type="text/javascript" src="assets/bower/Materialize/dist/js/materialize.min.js"></script>
@@ -36,14 +38,22 @@
         <script src="assets/bower/angular-timer/dist/angular-timer.min.js"></script>
         <script src="assets/bower/angular-ui-router/release/angular-ui-router.js"></script>
         <script src="assets/bower/ui-router-extras/release/ct-ui-router-extras.js"></script>
-        <script src="http://crisbeto.github.io/angular-svg-round-progressbar/roundProgress.min.js"></script>
+        <script src="assets/bower/angular-materialize/src/angular-materialize.js"></script>
+        <script src="assets/bower/angular-svg-round-progressbar/build/roundProgress.min.js"></script>
+
+        <!-- App files -->
         <script src="app/app.js"></script>
         <script src="app/main.controller.js"></script>
+        
+        <script src="app/blocks/about/about.directive.js"></script>
         <script src="app/blocks/tasks.service.js"></script>
+
+        <script src="app/countdown/countdown.controller.js"></script>
+        <script src="app/countdownStatus.service.js"></script>
+
         <script src="app/list/list.controller.js"></script>
         <script src="app/list/task.controller.js"></script>
         <script src="app/list/task.directive.js"></script>
-        <script src="app/countdown/countdown.controller.js"></script>
-        <script src="app/countdownStatus.service.js"></script>
+        
     </body>
 </html>

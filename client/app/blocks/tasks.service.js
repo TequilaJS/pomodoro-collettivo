@@ -1,29 +1,29 @@
 (function(){
-	"use strict";
+	'use strict';
 	
 	angular
-		.module("pomodoro")
-		.factory("TaskService", TaskService);
+		.module('pomodoro')
+		.factory('TaskService', TaskService);
 	
 	TaskService.$inject = ['$http'];
 	
 	function TaskService($http) {
 		
-		var apiUrl = "/api/";
+		var apiUrl = '/api/';
 		
 		var TaskProvider = function(){};
 		
 		TaskProvider.prototype.getTasks = function(){
 				return function(){
-					$http.get(apiUrl+"tasks")						
+					$http.get(apiUrl + 'tasks')						
 				}				
 		}
 		
 		TaskProvider.prototype.getTaskById = function(id){
 			var task = {};			
 			$http({
-				method: "GET",
-				url: apiUrl+"tasks/"+id
+				method: 'GET',
+				url: apiUrl + 'tasks/' + id
 			}).then(
 				function success (res) {
 				task = res.data;
@@ -37,8 +37,8 @@
 		TaskProvider.prototype.deleteTask = function(id){
 			var tasks = [];
 			$http({
-				method: "DELETE",
-				url: apiUrl+"task/"+id
+				method: 'DELETE',
+				url: apiUrl + 'task/' + id
 			}).then(
 				function success (res) {
 				tasks = res.data;
@@ -53,8 +53,8 @@
 		TaskProvider.prototype.createTask = function(task){
 			var tasks = [];
 			$http({
-				method: "POST",
-				url: apiUrl+"tasks",
+				method: 'POST',
+				url: apiUrl + 'tasks',
 				headers: {
 					'Content-type': 'application/x-www-form-urlencoded'
 				},
@@ -73,8 +73,8 @@
 			var tasks = [];
 			
 			$http({
-				method: "PUT",
-				url: apiUrl+"task/"+id,
+				method: 'PUT',
+				url: apiUrl + 'task/' + id,
 				headers: {
 					'Content-type': 'application/x-www-form-urlencoded'
 				},
