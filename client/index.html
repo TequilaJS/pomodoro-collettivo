@@ -1,50 +1,49 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="pomodoro">
-<head>
-  <meta charset="UTF-8">
-  <title>Pomodoro Collettivo</title>
-   <!--Import Google Icon Font-->
+    <head>
+        <meta charset="UTF-8">
+        <title>Pomodoro Collettivo</title>
+        <!--Import Google Icon Font-->
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!--Import materialize.css-->
         <link type="text/css" rel="stylesheet" href="assets/bower/Materialize/dist/css/materialize.min.css"  media="screen,projection"/>
-
         <link href="assets/styles/app.css" rel="stylesheet">
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <base href="/">
-</head>
-<body ng-controller="MainController as vmMain" class="grey lighten-2">
-    
-    <a href="" ng-click="vmMain.display('list')">List</a>
-    <a href="" ng-click="vmMain.display('countdown')">Timer</a>
-
-    <div ui-view="list" ng-show="vmMain.displayView === 'list'"></div>
-    <div ui-view="countdown" ng-show="vmMain.displayView === 'countdown'"></div>
-
-    <!--Import jQuery before materialize.js-->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="assets/bower/Materialize/dist/js/materialize.min.js"></script>
-    
-
-    <script src="assets/bower/angular/angular.js"></script>
-    <script src="assets/bower/momentjs/moment.js"></script>
-    <script src="assets/bower/humanize-duration/humanize-duration.js"></script>
-    <script src="assets/bower/angular-timer/dist/angular-timer.min.js"></script>
-    <script src="assets/bower/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="assets/bower/ui-router-extras/release/ct-ui-router-extras.js"></script>
-
-    <script src="http://crisbeto.github.io/angular-svg-round-progressbar/roundProgress.min.js"></script>
-
-    <script src="app/app.js"></script>
-    <script src="app/main.controller.js"></script>
-
-    <script src="app/blocks/tasks.service.js"></script>
-    <script src="app/list/list.controller.js"></script>
-    <script src="app/list/task.controller.js"></script>
-    <script src="app/list/task.directive.js"></script>
-
-    <script src="app/countdown/countdown.controller.js"></script>
-    <script src="app/countdownStatus.service.js"></script>
-
-</body>
+        <base href="/">
+    </head>
+    <!-- TODO: Move this into a main state -->
+    <body ng-controller="MainController as vmMain" class="grey lighten-2">
+        
+        <div class="row">
+            <div class="col s12">
+                <ul class="tabs">
+                    <li class="tab col s3"><a class="teal-text lighten-1" href="" ng-click="vmMain.display('list')">List</a></li>
+                    <li class="tab col s3"><a class="teal-text lighten-1" href="" ng-click="vmMain.display('countdown')">Timer</a></li>
+                </ul>
+            </div>
+            <div id="test1" class="col s12"><div ui-view="list" ng-show="vmMain.displayView === 'list'"></div></div>
+            <div id="test2" class="col s12"><div ui-view="countdown" ng-show="vmMain.displayView === 'countdown'"></div></div>
+        </div>
+        
+        <!--Import jQuery before materialize.js-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="assets/bower/Materialize/dist/js/materialize.min.js"></script>
+        
+        <script src="assets/bower/angular/angular.js"></script>
+        <script src="assets/bower/momentjs/moment.js"></script>
+        <script src="assets/bower/humanize-duration/humanize-duration.js"></script>
+        <script src="assets/bower/angular-timer/dist/angular-timer.min.js"></script>
+        <script src="assets/bower/angular-ui-router/release/angular-ui-router.js"></script>
+        <script src="assets/bower/ui-router-extras/release/ct-ui-router-extras.js"></script>
+        <script src="http://crisbeto.github.io/angular-svg-round-progressbar/roundProgress.min.js"></script>
+        <script src="app/app.js"></script>
+        <script src="app/main.controller.js"></script>
+        <script src="app/blocks/tasks.service.js"></script>
+        <script src="app/list/list.controller.js"></script>
+        <script src="app/list/task.controller.js"></script>
+        <script src="app/list/task.directive.js"></script>
+        <script src="app/countdown/countdown.controller.js"></script>
+        <script src="app/countdownStatus.service.js"></script>
+    </body>
 </html>

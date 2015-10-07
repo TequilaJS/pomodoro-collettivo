@@ -61,3 +61,7 @@ path {
 #mini-progress {
     padding-top: 10px;
 }
+
+.tabs .indicator {
+    background: #26a69a;    
+}
