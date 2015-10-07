@@ -57,6 +57,7 @@
 			}).then(function success (res) {				
 				vmList.tasks = res.data;
 				vmList.task = {};
+				vmList.isAddingTask = false;
 			}, function error (res){
 				console.log(res);
 			});
