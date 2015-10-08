@@ -7,7 +7,23 @@
 	
 	<!-- task list | List of tasks yet to complete -->
 	
-	
+	<div class="row card-panel">
+			<form class="col s12">
+			<div class="row">
+				<div class="input-field col s5">
+					<input ng-model="vmList.task.title" id="task_title" type="text" class="validate">
+					<label for="task_title">Title</label>
+				</div>
+				<div class="input-field col s5">
+					<input ng-model="vmList.task.description" id="task_description" type="text" class="validate">
+					<label for="task_description">Description</label>
+				</div>
+				<div class="input-field col s2">
+					<button ng-click="vmList.createTask()" class="btn waves-effect red">Create</button>
+				</div>
+			</div>
+		</form>
+	</div>
 
 	<ul id="todo-list" class="collection with-header">
 		<li class="collection-header">To Do</li>
@@ -23,31 +39,10 @@
 
     <br/>
 
-	<div class="row" ng-show="vmList.isAddingTask">
-		<form class="col s12">
-			<div class="row">
-				<div class="input-field col s5">
-					<input ng-model="vmList.task.title" id="task_title" type="text" class="validate">
-					<label for="task_title">Title</label>
-				</div>
-				<div class="input-field col s5">
-					<input ng-model="vmList.task.description" id="task_description" type="text" class="validate">
-					<label for="task_description">Description</label>
-				</div>
-
-				<div class="input-field col s2">
-					<button ng-click="vmList.createTask()" class="btn waves-effect red">Create</button>
-				</div>
-
-			</div>
-
-		</form>
-	</div>
-
-	<div class="right-align">
+<!-- 	<div class="right-align">
 		<a ng-click="vmList.isAddingTask = !vmList.isAddingTask" class="secondary-content"><i class="material-icons">add</i></a>
 	</div>
-
+ -->
 	<!-- task list | List of tasks already completed -->
 	
 	<ul class="collection with-header z-depth-1">

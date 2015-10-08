@@ -2,37 +2,47 @@
     'use strict';
 
     angular.module('pomodoro', [
-        'ui.router', 
+        'ui.router',
         'timer',
         'ui.materialize',
-        'angular-svg-round-progress']);
+        'angular-svg-round-progress'
+    ]);
 
     angular
         .module('pomodoro')
         .config(configure);
 
-    configure.$inject = ['$stateProvider', '$urlRouterProvider'/*, '$stickyStateProvider' , '$locationProvider'*/ ];
+    configure.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider' ];
 
-    function configure($stateProvider, $urlRouterProvider/*, $stickyStateProvider , $locationProvider*/ ) {
+    function configure($stateProvider, $urlRouterProvider, $locationProvider ) {
 
-        $urlRouterProvider.otherwise('/');
-        // $stickyStateProvider.enableDebug(true);
+        var defaultRoute = localStorage.getItem('defaultTab') || 'main.list';
+        
+        localStorage.setItem('defaultTab', defaultRoute);
+
+        $urlRouterProvider.otherwise('/' + defaultRoute);
+
         $stateProvider
-            .state('/', {
+            .state('main', {
+                abstract: true,
+                controller: 'MainController',
+                controllerAs: 'vmMain',
+                templateUrl: 'app/main.template.html',
                 url: '/',
-                views: {
-                    'list': {
-                        templateUrl: 'app/list/list.template.html',
-                        controller: 'ListController',
-                        controllerAs: 'vmList'        
-                    },
-                    'countdown': {
-                        templateUrl: 'app/countdown/countdown.template.html',
-                        controller: 'CountdownController',
-                        controllerAs: 'vmCountdown',
-                    }
-                }
+            })
+            .state('main.list', {
+                controller: 'ListController',
+                controllerAs: 'vmList',
+                templateUrl: 'app/list/list.template.html',
+                url: 'list'    
+            })
+            .state('main.countdown', {
+                controller: 'CountdownController',
+                controllerAs: 'vmCountdown',
+                templateUrl: 'app/countdown/countdown.template.html',
+                url: 'countdown'    
             });
-        // $locationProvider.html5Mode(true);
+        $locationProvider.html5Mode(true);
+        
     }
 })();

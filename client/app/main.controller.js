@@ -5,26 +5,23 @@
         .module('pomodoro')
         .controller('MainController', MainController);
 
-    MainController.$inject = [];
+    MainController.$inject = ['$scope', '$state'];
 
-    function MainController() {
+    function MainController($scope, $state) {
         var vmMain = this;
-        vmMain.title = 'MainController';
-
-        vmMain.display = display;
+        
         vmMain.currentTask = "Current task name goes here.";
 
-        activate();
-
-        function activate() {
-            vmMain.displayView = 'countdown';
-        }
-        function display(view) {
-            vmMain.displayView = view;
-        }
+        (function activate() {
+            // vmMain.displayView = localStorage.getItem('defaultTab');
+        })();
 
         function setCurrentTask(task) {
             vmMain.currentTask = task;
         }
+
+        $scope.$on('$stateChangeSuccess', function() {
+            localStorage.setItem('defaultTab', $state.current.url);
+        });
     }
 })();
