@@ -8,54 +8,49 @@
 	<!-- task list | List of tasks yet to complete -->
 	
 	<div class="row card-panel">
-			<form class="col s12">
-			<div class="row">
-				<div class="input-field col s5">
-					<input ng-model="vmList.task.title" id="task_title" type="text" class="validate">
-					<label for="task_title">Title</label>
+			<form novalidate>
+				<div class="input-field col s12 m5">
+					<input ng-model="vmList.task.title" id="task_title" type="text" class="" floating-label="Title">
 				</div>
-				<div class="input-field col s5">
-					<input ng-model="vmList.task.description" id="task_description" type="text" class="validate">
-					<label for="task_description">Description</label>
+				<div class="input-field col s12 m5">
+					<input ng-model="vmList.task.description" id="task_description" type="text" class="" floating-label="Description">
 				</div>
-				<div class="input-field col s2">
-					<button ng-click="vmList.createTask()" class="btn waves-effect red">Create</button>
+				<div class="input-field col s12 m2">
+					<button ng-click="vmList.createTask()" ng-disabled="!vmList.task.title" class="btn red center-align">Add</button>
 				</div>
-			</div>
 		</form>
 	</div>
 
-	<ul id="todo-list" class="collection with-header">
-		<li class="collection-header">To Do</li>
-		<li class="collection-item" ng-repeat="task in vmList.tasks">
-			<div >
-				<input ng-model="task.status" ng-change="vmList.checkTask(task)" type="checkbox" id="task_{{$id}}_1" />
-      			<label for="task_{{$id}}_1">{{task.title}}</label>						
-				<span class="task-description">{{task.description}}</span>
-				<a ng-click="vmList.deleteTask(task._id)" class="secondary-content"><i class="material-icons">remove</i></a>
-            </div>
-		</li>
-	</ul>
-
-    <br/>
-
-<!-- 	<div class="right-align">
-		<a ng-click="vmList.isAddingTask = !vmList.isAddingTask" class="secondary-content"><i class="material-icons">add</i></a>
+	<div class="row card-panel red">
+		<ul id="todo-list" class="collection with-header">
+			<li class="collection-header">To Do</li>
+			<li class="collection-item" ng-repeat="task in vmList.tasks">
+				<div >
+					<input ng-model="task.status" ng-change="vmList.checkTask(task)" type="checkbox" id="task_{{$id}}_1" />
+		      		<label for="task_{{$id}}_1">{{task.title}}</label>						
+					
+					<span class="task-description">{{task.description}}</span>
+					<a ng-click="vmList.deleteTask(task._id)"><i class="material-icons">remove</i></a>
+		        </div>
+			</li>
+		</ul>
 	</div>
- -->
+
 	<!-- task list | List of tasks already completed -->
 	
-	<ul class="collection with-header z-depth-1">
-		<li class="collection-header">Done</li>
-		<li class="collection-item" ng-repeat="task in vmList.tasks" ng-if="task.status == '1'">
-			<div>
-				<input ng-model="task.status" type="checkbox" id="done_{{$id}}_1" />
-      			<label for="done_{{$id}}_1">{{task.title}}</label>
-				<span class="task-description">{{task.description}}</span>
-				<a ng-click="vmList.deleteTask(task._id)" class="secondary-content"><i class="material-icons">remove</i></a>
-				<a ng-click="" class="secondary-content"><i class="material-icons">edit</i></a>
-			</div>                
-		</li>
-	</ul>
+	<div class="row card-panel teal">
+		<ul class="collection with-header z-depth-1">
+			<li class="collection-header">Done</li>
+			<li class="collection-item" ng-repeat="task in vmList.tasks" ng-if="task.status == '1'">
+				<div>
+					<input ng-model="task.status" type="checkbox" id="done_{{$id}}_1" />
+		      			<label for="done_{{$id}}_1">{{task.title}}</label>
+					<span class="task-description">{{task.description}}</span>
+					<a ng-click="vmList.deleteTask(task._id)" class="secondary-content"><i class="material-icons">remove</i></a>
+					<a ng-click="" class="secondary-content"><i class="material-icons">edit</i></a>
+				</div>                
+			</li>
+		</ul>
+	</div>
 	
 </div>

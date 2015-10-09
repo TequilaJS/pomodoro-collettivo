@@ -4,7 +4,8 @@
     angular.module('pomodoro', [
         'ui.router',
         'timer',
-        'ui.materialize',
+        'ngAnimate',
+        'ngMaterialize',
         'angular-svg-round-progress'
     ]);
 

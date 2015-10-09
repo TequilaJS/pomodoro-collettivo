@@ -9,12 +9,12 @@
 
     function ListController(countdownStatus, $http) {
         var vmList = this;
-      
+
 
         // Methods
-        vmList.checkTask   = checkTask;
-        vmList.createTask  = createTask;
-        vmList.deleteTask  = deleteTask;
+        vmList.checkTask = checkTask;
+        vmList.createTask = createTask;
+        vmList.deleteTask = deleteTask;
         vmList.getAllTasks = getAllTasks;
 
         // Properties
@@ -54,16 +54,19 @@
         }
 
         function createTask() {
-            $http({
-                method: 'POST',
-                url: '/api/tasks/',
-                data: vmList.task
-            }).then(function success(res) {
-                vmList.tasks = res.data;
-                vmList.task = {};
-            }, function error(res) {
-                console.log(res);
-            });
+
+            if (vmList.task) {
+                $http({
+                    method: 'POST',
+                    url: '/api/tasks/',
+                    data: vmList.task
+                }).then(function success(res) {
+                    vmList.tasks = res.data;
+                    vmList.task = {};
+                }, function error(res) {
+                    console.log(res);
+                });
+            }
         }
 
         function deleteTask(id) {
@@ -92,6 +95,6 @@
             return tasks;
         }
 
-       
+
     }
 })();
