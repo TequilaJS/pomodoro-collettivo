@@ -5,33 +5,13 @@
         .module('pomodoro')
         .controller('CountdownController', CountdownController);
 
-    CountdownController.$inject = ['$scope', '$timeout'];
+    CountdownController.$inject = ['$scope', '$timeout', 'COUNTDOWN_TYPES'];
 
-    function CountdownController($scope, $timeout) {
+    function CountdownController($scope, $timeout, COUNTDOWN_TYPES) {
         var vmCountdown = this,
             sounds = {
                 ringer: null,
                 ticker: null
-            },
-            countdown_types = {
-                POMODORO: {
-                    color: '#f44336', //red
-                    duration: 15,
-                    // duration: 1500   
-                    name: 'Pomodoro',
-                },
-                SHORT_BREAK: {
-                    color: '#03a9f4', //light-blue
-                    duration: 4,
-                    // duration: 300   
-                    name: 'Short Break',
-                },
-                LONG_BREAK: {
-                    color: '#fdd835', //yellow darken-1
-                    duration: 10,
-                    // duration: 900   
-                    name: 'Long Break',
-                },
             };
 
         // Methods
@@ -42,13 +22,12 @@
         vmCountdown.toggleTickerMute = toggleTickerMute;
 
         // Properties
-        vmCountdown.countdown_types = countdown_types;
 
         /* Init function*/
         (function activate() {
 
             vmCountdown.alarmDuration = 2000;
-            vmCountdown.currentTimer = countdown_types.POMODORO;
+            vmCountdown.currentTimer = COUNTDOWN_TYPES.POMODORO;
             vmCountdown.elapsedPomodoros = 0;
             vmCountdown.elapsedTime = 0;
             vmCountdown.isTicking = false;
@@ -82,15 +61,15 @@
             stopTicker();
             sounds.ringer.play();
 
-            if (vmCountdown.currentTimer === countdown_types.POMODORO) {
+            if (vmCountdown.currentTimer === COUNTDOWN_TYPES.POMODORO) {
                 if (vmCountdown.elapsedPomodoros > 0 && vmCountdown.elapsedPomodoros % 3 === 0) {
-                    vmCountdown.currentTimer = countdown_types.LONG_BREAK;
+                    vmCountdown.currentTimer = COUNTDOWN_TYPES.LONG_BREAK;
                 } else {
-                    vmCountdown.currentTimer = countdown_types.SHORT_BREAK;
+                    vmCountdown.currentTimer = COUNTDOWN_TYPES.SHORT_BREAK;
                 }
                 vmCountdown.elapsedPomodoros++;
             } else {
-                vmCountdown.currentTimer = countdown_types.POMODORO;
+                vmCountdown.currentTimer = COUNTDOWN_TYPES.POMODORO;
             }
 
             $scope.$apply(); // update the current timer key for the timer to use
@@ -128,7 +107,7 @@
             shutUpAlarm();
 
             vmCountdown.isTicking = false;
-            vmCountdown.currentTimer = countdown_types.POMODORO;
+            vmCountdown.currentTimer = COUNTDOWN_TYPES.POMODORO;
             vmCountdown.elapsedPomodoros = 0;
         }
 

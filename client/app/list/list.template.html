@@ -29,8 +29,11 @@
 					<input ng-model="task.status" ng-change="vmList.checkTask(task)" type="checkbox" id="task_{{$id}}_1" />
 		      		<label for="task_{{$id}}_1">{{task.title}}</label>						
 					
-					<span class="task-description">{{task.description}}</span>
-					<a ng-click="vmList.deleteTask(task._id)"><i class="material-icons">remove</i></a>
+					<div class="right">
+						<span class="task-description">{{task.description}}</span>
+						<button class="btn-flat" ng-click="vmList.deleteTask(task._id)"><i class="material-icons">remove</i></button>
+						<button class="btn-flat" ng-click=""><i class="material-icons">edit</i></button>
+					</div>
 		        </div>
 			</li>
 		</ul>
@@ -46,8 +49,8 @@
 					<input ng-model="task.status" type="checkbox" id="done_{{$id}}_1" />
 		      			<label for="done_{{$id}}_1">{{task.title}}</label>
 					<span class="task-description">{{task.description}}</span>
-					<a ng-click="vmList.deleteTask(task._id)" class="secondary-content"><i class="material-icons">remove</i></a>
-					<a ng-click="" class="secondary-content"><i class="material-icons">edit</i></a>
+					<button class="btn-flat" ng-click="vmList.deleteTask(task._id)" ><i class="material-icons">remove</i></button>
+					<button class="btn-flat" ng-click=""><i class="material-icons">edit</i></button>
 				</div>                
 			</li>
 		</ul>
