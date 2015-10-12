@@ -28,7 +28,7 @@ module.exports = function(app){
                 	res.send("Resource not allowed");
             	}
             	res.json(tasks);
-        	})
+        	});
 		})
 	
 		//insert a task to the database
@@ -39,14 +39,15 @@ module.exports = function(app){
 			task.description 	= req.body.description;
 			task.status 		= req.body.status;
 			
-			task.save( function ( error ) {
+			task.save( function ( error, newTask ) {
 				if ( error ) {
 					res.send ( 'Resource not allowed' )
 				}
-				Task.find(function(err, tasks){
-					if (err) res.send(err);
-					res.json(tasks);
-				})
+				res.json(newTask);
+				// Task.find(function(err, tasks){
+				// 	if (err) res.send(err);
+				// 	res.json(tasks);
+				// });
 			});        
 		});
 
@@ -59,7 +60,7 @@ module.exports = function(app){
 			Task.findById(req.params.task_id, function(err, task){
 				if (err) res.send(err);
 				res.json(task);
-			})
+			});
 		})
 		
 		// update a task by id
@@ -71,14 +72,14 @@ module.exports = function(app){
 				task.description = req.body.description;
 				task.status = req.body.status;
 				
-				task.save(function(err){
+				task.save(function(err, updatedTask){
 					if (err) res.send(err);
-					
-					Task.find(function(err, tasks){
-						if (err) res.send(err);
-						res.json(tasks);
-					})
-				})
+					res.json(updatedTask);
+					// Task.find(function(err, tasks){
+					// 	if (err) res.send(err);
+					// 	res.json(tasks);
+					// });
+				});
 			});
 		})
 		
@@ -91,8 +92,8 @@ module.exports = function(app){
 				Task.find(function(err, tasks){
 					if (err) res.send(err);
 					res.json(tasks);
-				})
-			})
+				});
+			});
 		});
 	app.use('/api', router);
 

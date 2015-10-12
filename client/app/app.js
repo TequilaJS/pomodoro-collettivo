@@ -40,8 +40,11 @@
             .state('main.countdown', {
                 controller: 'CountdownController',
                 controllerAs: 'vmCountdown',
+                params: {
+                    task: null
+                },
                 templateUrl: 'app/countdown/countdown.template.html',
-                url: 'countdown'    
+                url: 'countdown'
             });
         $locationProvider.html5Mode(true);
         

@@ -8,7 +8,7 @@
 	<!-- task list | List of tasks yet to complete -->
 	
 	<div class="row card-panel">
-			<form novalidate>
+		<form novalidate>
 				<div class="input-field col s12 m5">
 					<input ng-model="vmList.task.title" id="task_title" type="text" class="" floating-label="Title">
 				</div>
@@ -21,32 +21,28 @@
 		</form>
 	</div>
 
-	<div class="row card-panel red">
+	<div class="row card-panel">
 		<ul id="todo-list" class="collection with-header">
-			<li class="collection-header">To Do</li>
-			<li class="collection-item" ng-repeat="task in vmList.tasks">
-				<div >
-					<input ng-model="task.status" ng-change="vmList.checkTask(task)" type="checkbox" id="task_{{$id}}_1" />
-		      		<label for="task_{{$id}}_1">{{task.title}}</label>						
-					
-					<div class="right">
-						<span class="task-description">{{task.description}}</span>
-						<button class="btn-flat" ng-click="vmList.deleteTask(task._id)"><i class="material-icons">remove</i></button>
-						<button class="btn-flat" ng-click=""><i class="material-icons">edit</i></button>
-					</div>
-		        </div>
+			<li class="collection-header"><h5 class="red-text">To Do</h5></li>
+			<li class="collection-item task-item" ng-repeat="task in vmList.tasks | filter: {'status': false} | orderBy: '-'">
+				<input ng-model="task.status" ng-change="vmList.checkTask(task);" type="checkbox" id="task_{{$id}}_1" />
+				<label for="task_{{$id}}_1">{{task.title}}</label>
+				<span class="task-description">{{task.description}}</span>
+				<button tooltip="Start Timing" tooltip-append-to-body="true" class="btn-flat right" ng-click="vmList.startTiming(task)"><i class="material-icons">query_builder</i></button>
+				<button tooltip="Edit this task."  tooltip-append-to-body="true"class="btn-flat right" ng-click=""><i class="material-icons">edit</i></button>
+				<button tooltip="Remove this task"  tooltip-append-to-body="true"class="btn-flat right" ng-click="vmList.deleteTask(task._id)"><i class="material-icons">remove</i></button>
 			</li>
 		</ul>
 	</div>
 
 	<!-- task list | List of tasks already completed -->
 	
-	<div class="row card-panel teal">
+	<div class="row card-panel">
 		<ul class="collection with-header z-depth-1">
-			<li class="collection-header">Done</li>
-			<li class="collection-item" ng-repeat="task in vmList.tasks" ng-if="task.status == '1'">
+			<li class="collection-header"><h5 class="teal-text">Done</h5></li>
+			<li class="collection-item task-item" ng-repeat="task in vmList.tasks | filter: {'status': true} | orderBy: '-'">
 				<div>
-					<input ng-model="task.status" type="checkbox" id="done_{{$id}}_1" />
+					<input ng-model="task.status" type="checkbox" id="done_{{$id}}_1" ng-change="vmList.checkTask(task);" />
 		      			<label for="done_{{$id}}_1">{{task.title}}</label>
 					<span class="task-description">{{task.description}}</span>
 					<button class="btn-flat" ng-click="vmList.deleteTask(task._id)" ><i class="material-icons">remove</i></button>

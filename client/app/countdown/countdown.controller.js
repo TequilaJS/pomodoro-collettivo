@@ -5,9 +5,9 @@
         .module('pomodoro')
         .controller('CountdownController', CountdownController);
 
-    CountdownController.$inject = ['$scope', '$timeout', 'COUNTDOWN_TYPES'];
+    CountdownController.$inject = ['$scope', '$timeout', 'COUNTDOWN_TYPES', '$stateParams'];
 
-    function CountdownController($scope, $timeout, COUNTDOWN_TYPES) {
+    function CountdownController($scope, $timeout, COUNTDOWN_TYPES, $stateParams) {
         var vmCountdown = this,
             sounds = {
                 ringer: null,
@@ -22,9 +22,13 @@
         vmCountdown.toggleTickerMute = toggleTickerMute;
 
         // Properties
+        vmCountdown.currentTask = {};
 
         /* Init function*/
         (function activate() {
+
+            console.log('$stateParams.task', $stateParams.task);
+            vmCountdown.currentTask = $stateParams.task || {title: 'Please select a Task'};
 
             vmCountdown.alarmDuration = 2000;
             vmCountdown.currentTimer = COUNTDOWN_TYPES.POMODORO;

@@ -2,7 +2,32 @@ body {
     user-select: none;
     -webkit-user-select: none;
 }
-      
+
+.container {
+    min-height: 850px;
+}
+
+.task-item.ng-enter {
+  -webkit-animation: bounceInLeft 1s;
+  -moz-animation: bounceInLeft 1s;
+  -ms-animation: bounceInLeft 1s;
+  animation: bounceInLeft 1s;
+}
+
+.task-item.ng-leave {
+  -webkit-animation: bounceOutRight 1s;
+  -moz-animation: bounceOutRight 1s;
+  -ms-animation: bounceOutRight 1s;
+  animation: bounceOutRight 1s;
+}
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+    display: none !important;
+}
+
+.task-item > button {
+    margin-top: -5px;
+}
 
 /* task list styles */
 
