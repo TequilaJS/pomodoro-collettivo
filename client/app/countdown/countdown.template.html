@@ -5,36 +5,36 @@
 <div class="container" id="countdown-view">
 	
 	<!-- This is where the current task title is going to be displayed -->
-	<div class="row card-panel red darken-2 valign-wrapper">
-		<div class="col l12 m12 s10 valign center-align">
-			<h4 class="white-text">{{vmCountdown.currentTask.title}}</h4>
+	<div class="row card-panel white valign-wrapper">
+		<div class="col s8 m12 l12 valign">
+			<h4 class="red-text flow-text center-align truncate">{{vmCountdown.currentTask.title}}</h4>
 		</div>
 		<!-- If there were not enough space to display the full countdown
 			timer, then a simpler version will be at the right side  -->
-		<div
-			id="mini-progress"
-			class="col s2 right-align valign hide-on-med-and-up"
-			round-progress
-			max="vmCountdown.currentTimer.duration"
-			current="vmCountdown.elapsedTime"
-			radius="30"
-			bgcolor="{{vmCountdown.currentTimer.color}}"
-			color="#fff"
-			clockwise="false"
-			stroke="4"
-			>
+		<div class="col s4 hide-on-med-and-up right valign">
+			<div
+				id="mini-progress"
+				round-progress
+				max="vmCountdown.currentTimer.duration"
+				current="vmCountdown.elapsedTime"
+				radius="25"
+				bgcolor="{{vmCountdown.currentTimer.color}}"
+				color="#fff"
+				clockwise="false"
+				stroke="4"
+				>
+			</div>
 		</div>
 	</div>
+
 	<!-- This is the "control panel" for the timer, 
 		the start/stop button is presented here as well as the 
 		current count of pomodoros dedicated to the task at hand.
 		Also, the user can mute/unmute the ticker sound -->
-	<div class="row card-panel white valign-wrapper">
+	<div class="row white card-panel">
 
-		<div class="col s12 m12 l4 left-align">
-			<h6>Currently timing on: {{vmCountdown.currentTimer.name}}</h6>
-			
-			<!-- Mute/unmute the ticker -->
+	    <div class="col s12 m4 left-align">
+	    	<h6>Currently timing on: {{vmCountdown.currentTimer.name}}</h6>
 			<div class="switch">
 				<span class="black-text">Ticker sound:</span>
 				<br>
@@ -46,27 +46,33 @@
 					<span class="lever"></span> On
 				</label>
 			</div>
-		</div>
+	    </div>
 
-		<!-- Button to start/reset the countdown -->
-		<div class="col s12 m12 l4 center-align">
-			<button type="button" class="btn-floating btn-large waves-effect waves red">
+		<div class="col s12 hide-on-med-and-up"><p></p></div>
+	   
+	    <!-- Button to start/reset the countdown -->
+	    <div class="col s12 m4 center-align">
+			<button type="button" 
+					class="btn-floating btn-large waves-effect waves red"
+					ng-disabled="!vmCountdown.currentTask._id">
 			<i 	ng-if="!vmCountdown.isTicking"
 				ng-click="vmCountdown.startTimer()"
 				class="material-icons">play_arrow</i>
 			<i 	ng-if="vmCountdown.isTicking"
 				ng-click="vmCountdown.stopTimer()"
 				class="material-icons">stop</i>
-			</button>
-		</div>
-
-		<!-- Displays how many pomodoros have been dedicated to a task -->
-		<div class="col s12 m12 l4 right-align">
+			</button> 
+	    </div>
+		
+		<div class="col s12 hide-on-med-and-up"><p></p></div>	
+	  
+	    <!-- Displays how many pomodoros have been dedicated to a task -->
+	    <div class="col s12 m4 right-align">
 			<img src="../../assets/svg/pomodoro.svg" alt="">
-			<p class="right" style="font-size: 1.3em;"> &times; {{vmCountdown.elapsedPomodoros}}</p>
-		</div>
-	</div>
-	
+			<h5 class="right"> &times; {{vmCountdown.elapsedPomodoros}}</h5>
+	    </div>
+  	</div>
+
 	<!-- The full countdown timer, inside a panel which will be displayed
 		only when there is enough space to do so -->
 	<div class="row card-panel white hide-on-small-only">

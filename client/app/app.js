@@ -6,6 +6,7 @@
         'timer',
         'ngAnimate',
         'ngMaterialize',
+        'ngTouch',
         'angular-svg-round-progress'
     ]);
 

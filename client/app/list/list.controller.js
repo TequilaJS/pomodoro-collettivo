@@ -17,6 +17,7 @@
         vmList.deleteTask = deleteTask;
         vmList.getAllTasks = getAllTasks;
         vmList.startTiming = startTiming;
+        vmList.swipeCheckTask = swipeCheckTask;
 
         // Properties
         vmList.tasks = [];
@@ -33,7 +34,6 @@
                 console.log(res);
             });
         })();
-
 
         function checkTask(task) {
             console.log('updating a task');
@@ -109,6 +109,11 @@
 
         function startTiming(task) {
             $state.go('main.countdown', {task: task});
+        }
+
+        function swipeCheckTask(task) {
+            task.status = true;
+            checkTask(task);   
         }
     }
 })();

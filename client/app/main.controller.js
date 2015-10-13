@@ -14,6 +14,7 @@
 
         (function activate() {
             // vmMain.displayView = localStorage.getItem('defaultTab');
+            $scope.$state  = $state;
         })();
 
         function setCurrentTask(task) {
