@@ -40,16 +40,16 @@
 	<!-- task list | List of tasks already completed -->
 	
 	<div class="row card-panel">
-		<ul class="collection with-header z-depth-1">
+		<ul id="todo-list" class="collection with-header">
 			<li class="collection-header"><h5 class="teal-text">Done</h5></li>
-			<li class="collection-item task-item" ng-repeat="task in vmList.tasks | filter: {'status': true} | orderBy: '-'">
-				<div>
-					<input ng-model="task.status" type="checkbox" id="done_{{$id}}_1" ng-change="vmList.checkTask(task);" />
-		      			<label for="done_{{$id}}_1">{{task.title}}</label>
-					<span class="task-description">{{task.description}}</span>
-					<button class="btn-flat" ng-click="vmList.deleteTask(task._id)" ><i class="material-icons">remove</i></button>
-					<button class="btn-flat" ng-click=""><i class="material-icons">edit</i></button>
-				</div>                
+			<li class="collection-item task-item" 
+				ng-repeat="task in vmList.tasks | filter: {'status': true} | orderBy: '-'"
+				ng-swipe-right="vmList.swipeCheckTask(task)">
+				<input ng-model="task.status" ng-change="vmList.checkTask(task);" type="checkbox" id="task_{{$id}}_1" />
+				<label for="task_{{$id}}_1">{{task.title}}</label>
+				<span class="task-description">{{task.description}}</span>
+				<button tooltip="Edit this task."  tooltip-append-to-body="true"class="btn-flat right" ng-click=""><i class="material-icons">edit</i></button>
+				<button tooltip="Remove this task"  tooltip-append-to-body="true"class="btn-flat right" ng-click="vmList.deleteTask(task._id)"><i class="material-icons">remove</i></button>
 			</li>
 		</ul>
 	</div>
