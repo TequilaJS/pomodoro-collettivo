@@ -28,8 +28,8 @@
         (function activate() {
 
             console.log('$stateParams.task', $stateParams.task);
-            vmCountdown.currentTask = $stateParams.task || {title: 'Please select a Task'};
-
+            vmCountdown.currentTask = $stateParams.task;
+            
             vmCountdown.alarmDuration = 2000;
             vmCountdown.currentTimer = COUNTDOWN_TYPES.POMODORO;
             vmCountdown.elapsedPomodoros = 0;

@@ -12,6 +12,7 @@
     "bootstrap": "~3.3.5",
     "font-awesome": "~4.4.0",
     "humanize-duration": "~3.3.0",
+    "lodash": "~3.10.1",
     "Materialize": "materialize#~0.97.0",
     "moment": "~2.10.6",
     "ng-materialize": "~0.1.2"

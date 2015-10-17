@@ -7,7 +7,8 @@
 	<!-- This is where the current task title is going to be displayed -->
 	<div class="row card-panel white valign-wrapper">
 		<div class="col s8 m12 l12 valign">
-			<h4 class="red-text flow-text center-align truncate">{{vmCountdown.currentTask.title}}</h4>
+			<h4 class="red-text flow-text center-align truncate" ng-if="vmCountdown.currentTask">{{vmCountdown.currentTask.title}}</h4>
+			<h4 class="flow-text center-align truncate" ng-if="!vmCountdown.currentTask"><a href="" class="red-text" ui-sref="main.list">Please Select a Task</a></h4>
 		</div>
 		<!-- If there were not enough space to display the full countdown
 			timer, then a simpler version will be at the right side  -->
