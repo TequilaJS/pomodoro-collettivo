@@ -38,7 +38,8 @@ module.exports = function(app){
 			task.title 			= req.body.title;
 			task.description 	= req.body.description;
 			task.status 		= req.body.status;
-			
+			task.elapsedPomodoros 		= req.body.elapsedPomodoros;
+
 			task.save( function ( error, newTask ) {
 				if ( error ) {
 					res.send ( 'Resource not allowed' )
@@ -71,7 +72,8 @@ module.exports = function(app){
 				task.title = req.body.title;
 				task.description = req.body.description;
 				task.status = req.body.status;
-				
+				task.elapsedPomodoros = req.body.elapsedPomodoros;
+
 				task.save(function(err, updatedTask){
 					if (err) res.send(err);
 					res.json(updatedTask);

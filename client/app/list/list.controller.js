@@ -44,7 +44,8 @@
                 data: {
                     title: task.title,
                     description: task.description,
-                    status: task.status
+                    status: task.status,
+                    elapsedPomodoros: task.elapsedPomodoros
                 }
             }).then(function success(res) {
                 // ackzell - NOTE: I don't think there is a need to update the entire set

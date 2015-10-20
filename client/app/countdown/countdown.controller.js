@@ -5,9 +5,9 @@
         .module('pomodoro')
         .controller('CountdownController', CountdownController);
 
-    CountdownController.$inject = ['$scope', '$timeout', 'COUNTDOWN_TYPES', '$stateParams'];
+    CountdownController.$inject = ['$scope', '$timeout', 'COUNTDOWN_TYPES', '$stateParams', '$http'];
 
-    function CountdownController($scope, $timeout, COUNTDOWN_TYPES, $stateParams) {
+    function CountdownController($scope, $timeout, COUNTDOWN_TYPES, $stateParams, $http) {
         var vmCountdown = this,
             sounds = {
                 ringer: null,
@@ -28,11 +28,11 @@
         (function activate() {
 
             console.log('$stateParams.task', $stateParams.task);
-            vmCountdown.currentTask = $stateParams.task;
+            vmCountdown.currentTask = $stateParams.task || {};
             
             vmCountdown.alarmDuration = 2000;
             vmCountdown.currentTimer = COUNTDOWN_TYPES.POMODORO;
-            vmCountdown.elapsedPomodoros = 0;
+            vmCountdown.elapsedPomodoros = vmCountdown.currentTask.elapsedPomodoros || 0;
             vmCountdown.elapsedTime = 0;
             vmCountdown.isTicking = false;
             vmCountdown.tickerSoundOn = true;
@@ -72,6 +72,19 @@
                     vmCountdown.currentTimer = COUNTDOWN_TYPES.SHORT_BREAK;
                 }
                 vmCountdown.elapsedPomodoros++;
+                vmCountdown.currentTask.elapsedPomodoros = vmCountdown.elapsedPomodoros;
+
+
+                $http({
+                    method: 'PUT',
+                    url: '/api/task/' + vmCountdown.currentTask._id,
+                    data: vmCountdown.currentTask
+                }).then(function success(res) {
+                    console.log(res);
+                }, function error(res) {
+                    console.log(res);
+                });
+
             } else {
                 vmCountdown.currentTimer = COUNTDOWN_TYPES.POMODORO;
             }
@@ -112,7 +125,7 @@
 
             vmCountdown.isTicking = false;
             vmCountdown.currentTimer = COUNTDOWN_TYPES.POMODORO;
-            vmCountdown.elapsedPomodoros = 0;
+
         }
 
         function toggleTickerMute() {

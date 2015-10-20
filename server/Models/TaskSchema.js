@@ -12,7 +12,8 @@ var Schema		= mongoose.Schema;
 var TaskSchema = new Schema({
     title: String,
     description: String,
-	status: Boolean
+	status: Boolean,
+    elapsedPomodoros: Number
 });
 
 //Export schema so it can be used where it is needed

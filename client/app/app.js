@@ -18,7 +18,7 @@
 
     function configure($stateProvider, $urlRouterProvider, $locationProvider ) {
 
-        var defaultRoute = localStorage.getItem('defaultTab') || 'main.list';
+        var defaultRoute = localStorage.getItem('defaultTab') || 'list';
         
         localStorage.setItem('defaultTab', defaultRoute);
 
@@ -30,7 +30,7 @@
                 controller: 'MainController',
                 controllerAs: 'vmMain',
                 templateUrl: 'app/main.template.html',
-                url: '/',
+                url: '/'
             })
             .state('main.list', {
                 controller: 'ListController',
