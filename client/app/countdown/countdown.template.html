@@ -77,10 +77,7 @@
 	<!-- The full countdown timer, inside a panel which will be displayed
 		only when there is enough space to do so -->
 	<div class="row card-panel white hide-on-small-only">
-		<div class="valign center-align" >
-			<!-- button could also be here, maybe? -->
-		</div>
-	
+
 		<!-- See: https://github.com/crisbeto/angular-svg-round-progressbar/blob/master/build/index.html -->
 		<div class="valign-wrapper progress-wrapper">
 			
@@ -90,6 +87,8 @@
 				countdown="vmCountdown.currentTimer.duration"
 				auto-start="false"
 				finish-callback="vmCountdown.ringAlarm()">{{mminutes}}:{{sseconds}}</timer>
+
+				{{vmCountdown.currentTimer.duration}}
 			</div>
 			
 			<!-- The actual progress bar -->
@@ -102,6 +101,7 @@
 				color="#eaeaea"
 				bgcolor="{{vmCountdown.currentTimer.color}}"
 				>
+				{{vmCountdown.currentTimer.duration}}
 			</div>
 		</div>
 	</div>

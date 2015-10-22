@@ -29,7 +29,7 @@
 
             console.log('$stateParams.task', $stateParams.task);
             vmCountdown.currentTask = $stateParams.task || {};
-            
+
             vmCountdown.alarmDuration = 2000;
             vmCountdown.currentTimer = COUNTDOWN_TYPES.POMODORO;
             vmCountdown.elapsedPomodoros = vmCountdown.currentTask.elapsedPomodoros || 0;
@@ -42,10 +42,9 @@
 
             // This is ugly, I gotta say :(
             $scope.$on('timer-tick', function(event, value) {
-                $timeout(function() {
+                $scope.$apply(function() {
                     vmCountdown.elapsedTime = vmCountdown.currentTimer.duration - (value.millis / 1000);
-                    $scope.$apply();
-                }, 0);
+                });
             });
         })();
 
@@ -63,7 +62,7 @@
 
         function ringAlarm() {
             stopTicker();
-            sounds.ringer.play();
+            // sounds.ringer.play();
 
             if (vmCountdown.currentTimer === COUNTDOWN_TYPES.POMODORO) {
                 if (vmCountdown.elapsedPomodoros > 0 && vmCountdown.elapsedPomodoros % 3 === 0) {
@@ -89,8 +88,6 @@
                 vmCountdown.currentTimer = COUNTDOWN_TYPES.POMODORO;
             }
 
-            $scope.$apply(); // update the current timer key for the timer to use
-
             // will auto shut down the alarm after n seconds
             $timeout(function() {
                 shutUpAlarm();
@@ -105,7 +102,8 @@
         }
 
         function startTimer() {
-            document.getElementsByTagName('timer')[0].start();
+            // document.getElementsByTagName('timer')[0].start();
+            $scope.$broadcast('timer-start');
 
             // in case the alarm is on
             shutUpAlarm();
@@ -118,14 +116,20 @@
         }
 
         function stopTimer() {
-            document.getElementsByTagName('timer')[0].reset();
+
             stopTicker();
+
             // in case the alarm is on
             shutUpAlarm();
 
             vmCountdown.isTicking = false;
+           
             vmCountdown.currentTimer = COUNTDOWN_TYPES.POMODORO;
 
+            $scope.$watch(function(){ return vmCountdown.currentTimer.duration; }, function() {
+                $scope.$broadcast('timer-reset');
+            });
+                
         }
 
         function toggleTickerMute() {
