@@ -1,94 +1,78 @@
-(function(){
+(function() {
 	'use strict';
-	
+
 	angular
 		.module('pomodoro')
-		.factory('TaskService', TaskService);
-	
-	TaskService.$inject = ['$http'];
-	
-	function TaskService($http) {
-		
-		var apiUrl = '/api/';
-		
-		var TaskProvider = function(){};
-		
-		TaskProvider.prototype.getTasks = function(){
-				return function(){
-					$http.get(apiUrl + 'tasks')						
-				}				
+		.factory('taskService', taskService);
+
+	taskService.$inject = ['$http', '$q'];
+
+	function taskService($http, $q) {
+		var baseUrl = '/api',
+			service = {
+				checkTask: checkTask,
+				createTask: createTask,
+				deleteTask: deleteTask,
+				getAllTasks: getAllTasks,
+			};
+		return service;
+
+		function checkTask(task) {
+			return $http.put(baseUrl + '/task/' + task._id, task)
+				.then(checkTaskComplete)
+				.catch(checkTaskFailed);
+
+			function checkTaskComplete(response) {
+				return response;
+			}
+
+			function checkTaskFailed(err) {
+				console.log('XHR Failed to check a task', err);
+			}
 		}
-		
-		TaskProvider.prototype.getTaskById = function(id){
-			var task = {};			
-			$http({
-				method: 'GET',
-				url: apiUrl + 'tasks/' + id
-			}).then(
-				function success (res) {
-				task = res.data;
-			}, 
-				function error (res){
-				console.log(res);
-			});		
-			return task;
+
+		function createTask(task) {
+			task.status = 0;
+			return $http.post(baseUrl + '/tasks/', task)
+				.then(createTaskComplete)
+				.catch(createTaskFailed);
+
+			function createTaskComplete(response) {
+				return response;
+			}
+
+			function createTaskFailed(err) {
+				console.log('XHR Failed when creating task', err);
+			}
 		}
-		
-		TaskProvider.prototype.deleteTask = function(id){
-			var tasks = [];
-			$http({
-				method: 'DELETE',
-				url: apiUrl + 'task/' + id
-			}).then(
-				function success (res) {
-				tasks = res.data;
-			}, 
-				function error (res){
-				console.log(res);
-			});
-			
-			return tasks;
+
+		function deleteTask(id) {
+			return $http.delete(baseUrl + '/task/' + id)
+				.then(deleteTaskComplete)
+				.catch(deleteTaskFailed);
+
+			function deleteTaskComplete(response) {
+				return response;
+			}
+
+			function deleteTaskFailed(error) {
+				console.log('XHR Failed for deleteTask', error);
+			}
+
 		}
-		
-		TaskProvider.prototype.createTask = function(task){
-			var tasks = [];
-			$http({
-				method: 'POST',
-				url: apiUrl + 'tasks',
-				headers: {
-					'Content-type': 'application/x-www-form-urlencoded'
-				},
-				data: task
-			}).then(
-				function success (res) {
-				tasks = res.data;
-			},
-				function error (res){
-				console.log(res);
-			});
-			return tasks;
+
+		function getAllTasks() {
+			return $http.get(baseUrl + '/tasks')
+				.then(getAllTasksComplete)
+				.catch(getAllTasksFailed);
+
+			function getAllTasksComplete(response) {
+				return response.data;
+			}
+
+			function getAllTasksFailed(error) {
+				console.log('XHR Failed for AllTasks', error);
+			}
 		}
-		
-		TaskProvider.prototype.updateTask = function(id, task){
-			var tasks = [];
-			
-			$http({
-				method: 'PUT',
-				url: apiUrl + 'task/' + id,
-				headers: {
-					'Content-type': 'application/x-www-form-urlencoded'
-				},
-				data: task
-			}).then(
-				function success (res) {
-				tasks = res.data;
-			},
-				function error (res){
-				console.log(res);
-			});			
-			return tasks;			
-		}		
-		
-		return TaskProvider;		
-	}	
+	}
 })();

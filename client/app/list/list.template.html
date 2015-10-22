@@ -10,10 +10,18 @@
 	<div class="row card-panel">
 		<form novalidate>
 				<div class="input-field col s12 m5">
-					<input ng-model="vmList.task.title" id="task_title" type="text" class="" floating-label="Title">
+					<input 	id="task_title" 
+							floating-label="Title"
+							ng-model="vmList.task.title" 
+							type="text"  
+							>
 				</div>
 				<div class="input-field col s12 m5">
-					<input ng-model="vmList.task.description" id="task_description" type="text" class="" floating-label="Description">
+					<input 	id="task_description" 
+							floating-label="Description"
+							ng-model="vmList.task.description" 
+							type="text" 
+							>
 				</div>
 				<div class="input-field col s12 m2">
 					<button ng-click="vmList.createTask()" ng-disabled="!vmList.task.title" class="btn red center-align">Add</button>
@@ -26,14 +34,8 @@
 			<li class="collection-header"><h5 class="red-text">To Do</h5></li>
 			<li class="collection-item task-item" 
 				ng-repeat="task in vmList.tasks | filter: {'status': false} | orderBy: '-'"
-				ng-swipe-right="vmList.swipeCheckTask(task)">
-				<input ng-model="task.status" ng-change="vmList.checkTask(task);" type="checkbox" id="task_{{$id}}_1" />
-				<label for="task_{{$id}}_1">{{task.title}}</label>
-				<span class="task-description">{{task.description}}</span>
-				<span class="task-pomodoros">: {{task.elapsedPomodoros}}</span>
-				<button tooltip="Start Timing" tooltip-append-to-body="true" class="btn-flat right" ng-click="vmList.startTiming(task)"><i class="material-icons">query_builder</i></button>
-				<button tooltip="Edit this task."  tooltip-append-to-body="true"class="btn-flat right" ng-click=""><i class="material-icons">edit</i></button>
-				<button tooltip="Remove this task"  tooltip-append-to-body="true"class="btn-flat right" ng-click="vmList.deleteTask(task._id)"><i class="material-icons">remove</i></button>
+				>
+				<pc-task task-model="task"></pc-task>
 			</li>
 		</ul>
 	</div>
