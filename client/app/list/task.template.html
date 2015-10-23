@@ -1,14 +1,27 @@
 <div ng-swipe-right="vmTask.swipeCheckTask()">
+
+    <!-- Checkbox  -->
     <input  id="task_{{$id}}_1"
-            ng-change="vmTask.checkTask()" 
+            ng-change="vmTask.checkTask()"
+            ng-disabled="vmTask.task.status" 
             ng-model="vmTask.task.status" 
             type="checkbox" 
             />
-    <label for="task_{{$id}}_1">{{vmTask.task.title}}</label>
+
+    <!-- Task Title -->
+    <label  for="task_{{$id}}_1"
+            >{{vmTask.task.title}}</label>
+
+    <!-- Task Description -->
+    <span   class="task-description"
+            >{{vmTask.task.description}}</span>
+
+    <!-- Invested pomodoros -->
+    <span   class="task-pomodoros"
+            ng-if="vmTask.task.elapsedPomodoros"
+            ><span>Invested pomodoros</span>: {{vmTask.task.elapsedPomodoros}}</span>
     
-    <span class="task-description">{{vmTask.task.description}}</span>
-    <span class="task-pomodoros">: {{vmTask.task.elapsedPomodoros}}</span>
-    
+    <!-- Start timing  -->
     <button class="btn-flat right"
             ng-click="vmList.startTiming()"
             tooltip="Start Timing" 
@@ -17,6 +30,7 @@
             <i class="material-icons">query_builder</i>
     </button>
     
+    <!-- Edit task -->
     <button class="btn-flat right"
             ng-click=""
             tooltip="Edit this task."        
@@ -25,6 +39,7 @@
             <i class="material-icons">edit</i>
     </button>
     
+    <!-- Remove task -->
     <button class="btn-flat right"
             ng-click="vmTask.deleteTask(vmTask.task._id)"
             tooltip="Remove this task"  

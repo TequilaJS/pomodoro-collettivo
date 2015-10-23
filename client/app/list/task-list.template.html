@@ -1,0 +1,16 @@
+<div class="row card-panel">
+    <ul class="collection with-header"
+        id="todo-list"
+        >
+        <li class="collection-header">
+            <h5 class="{{vmTaskList.header.color}}-text">
+            {{vmTaskList.header.title}}
+            </h5>
+        </li>
+        <li class="collection-item task-item"
+            ng-repeat="task in vmTaskList.tasks | filter: vmTaskList.filter | orderBy: '-'"
+            >
+            <pc-task task-model="task"></pc-task>
+        </li>
+    </ul>
+</div>

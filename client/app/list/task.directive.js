@@ -1,26 +1,33 @@
-/**
- * Created by arturomc on 9/26/2015.
- */
 (function() {
     'use strict';
 
     angular
         .module('pomodoro')
-        .directive('pcTask', taskDirective);
+        .directive('pcTask', pcTask);
 
-    function taskDirective() {
-        return {
+    pcTask.$inject = [];
+
+    function pcTask () {
+
+        var directive = {
             bindToController: {
                 task: '=taskModel'
             },
             controller: TaskController,
             controllerAs: 'vmTask',
+            link: link,
+            require: '^pcTaskList',
             restrict: 'E',
             scope: {},
             templateUrl: './app/list/task.template.html'
         };
-    }
+        return directive;
 
+        function link(scope, element, attrs, vmTaskList) {
+            vmTaskList.greet();
+        }
+    }
+    
     TaskController.$inject = ['$scope', 'taskService'];
 
     function TaskController($scope, taskService) {
@@ -30,8 +37,13 @@
         vmTask.deleteTask = deleteTask;
         vmTask.swipeCheckTask = swipeCheckTask;
 
+        vmTask.wo = function() {
+            console.log('wo!');
+        };
+
         (function init() {
             // assignProperties();
+            
         })();
 
         function assignProperties() {
@@ -57,5 +69,4 @@
         }
 
     } // TaskController
-
 })();
