@@ -14,6 +14,7 @@
 				createTask: createTask,
 				deleteTask: deleteTask,
 				getAllTasks: getAllTasks,
+				updateTask: updateTask
 			};
 		return service;
 
@@ -73,6 +74,10 @@
 			function getAllTasksFailed(error) {
 				console.log('XHR Failed for AllTasks', error);
 			}
+		}
+
+		function updateTask(task) {
+			return checkTask(task);
 		}
 	}
 })();

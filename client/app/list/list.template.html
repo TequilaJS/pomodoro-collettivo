@@ -7,27 +7,8 @@
 	
 	<!-- task list | List of tasks yet to complete -->
 	
-	<div class="row card-panel">
-		<form novalidate>
-				<div class="input-field col s12 m5">
-					<input 	id="task_title" 
-							floating-label="Title"
-							ng-model="vmList.task.title" 
-							type="text"  
-							>
-				</div>
-				<div class="input-field col s12 m5">
-					<input 	id="task_description" 
-							floating-label="Description"
-							ng-model="vmList.task.description" 
-							type="text" 
-							>
-				</div>
-				<div class="input-field col s12 m2">
-					<button ng-click="vmList.createTask()" ng-disabled="!vmList.task.title" class="btn red center-align">Add</button>
-				</div>
-		</form>
-	</div>
+	<pc-task-form save="vmList.save()">
+	</pc-task-form>
 
 	<!-- task list | List of todo tasks  -->
 

@@ -3,7 +3,6 @@
     <!-- Checkbox  -->
     <input  id="task_{{$id}}_1"
             ng-change="vmTask.checkTask()"
-            ng-disabled="vmTask.task.status" 
             ng-model="vmTask.task.status" 
             type="checkbox" 
             />
@@ -32,7 +31,7 @@
     
     <!-- Edit task -->
     <button class="btn-flat right"
-            ng-click=""
+            ng-click="vmTask.openModal()"
             tooltip="Edit this task."        
             tooltip-append-to-body="true"  
             >

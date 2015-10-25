@@ -5,9 +5,9 @@
         .module('pomodoro')
         .directive('pcTask', pcTask);
 
-    pcTask.$inject = [];
+    pcTask.$inject = ['$modal'];
 
-    function pcTask () {
+    function pcTask($modal) {
 
         var directive = {
             bindToController: {
@@ -16,57 +16,62 @@
             controller: TaskController,
             controllerAs: 'vmTask',
             link: link,
-            require: '^pcTaskList',
+            require: ['^pcTaskList', '^pcTask'],
             restrict: 'E',
             scope: {},
             templateUrl: './app/list/task.template.html'
         };
         return directive;
 
-        function link(scope, element, attrs, vmTaskList) {
-            vmTaskList.greet();
-        }
-    }
-    
-    TaskController.$inject = ['$scope', 'taskService'];
+        function link(scope, element, attrs, controllers) {
+            var vmTaskList = controllers[0],
+                vmTask = controllers[1];
 
-    function TaskController($scope, taskService) {
-        var vmTask = this;
+            vmTask.checkTask = checkTask;
+            vmTask.deleteTask = deleteTask;
+            vmTask.swipeCheckTask = swipeCheckTask;
+            vmTask.openModal = openModal;
 
-        vmTask.checkTask = checkTask;
-        vmTask.deleteTask = deleteTask;
-        vmTask.swipeCheckTask = swipeCheckTask;
+            function checkTask() {
+                vmTaskList.checkTask(vmTask.task);
+            }
 
-        vmTask.wo = function() {
-            console.log('wo!');
-        };
+            function deleteTask() {
+                vmTaskList.deleteTask(vmTask.task);
+            }
 
-        (function init() {
-            // assignProperties();
-            
-        })();
+            function openModal($event) {
 
-        function assignProperties() {
-            for (var p in vmTask.taskModel) {
-                vmTask[p] = vmTask.taskModel[p];
+                $modal.open({
+                    anchorElement: $event ? angular.element($event.target) : undefined,
+                    controller: 'ModalController',
+                    controllerAs: 'vmModal',
+                    resolve: {
+                        task: function() {
+                            return vmTask.task;
+                        }
+                    },
+                    scope: scope,
+                    templateUrl: './app/list/edit-task-modal.html',
+                });
+
+            }
+
+            function swipeCheckTask() {
+                vmTask.task.status = true;
+                checkTask();
             }
         }
+    }
 
-        function checkTask() {
-            return taskService.checkTask(vmTask.task);
-        }
+    TaskController.$inject = [];
 
-        function deleteTask() {
-            return taskService.deleteTask(vmTask.task._id)
-                .then(function deleteTaskCompleted(response) {
-                   $scope.$emit('task-removed', vmTask.task._id);
-                });
-        }
+    function TaskController() {
+        var vmTask = this;
 
-        function swipeCheckTask() {
-            vmTask.task.status = true;
-            checkTask();
-        }
+        (function init() {
 
-    } // TaskController
+        })();
+    }
+
 })();

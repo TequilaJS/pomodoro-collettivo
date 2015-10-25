@@ -5,19 +5,33 @@
         .module('pomodoro')
         .controller('ListController', ListController);
 
-    ListController.$inject = ['$state', '$http', 'taskService', '$scope'];
+    ListController.$inject = ['$scope', '$state', 'taskService'];
 
-    function ListController($state, $http, taskService, $scope) {
+    function ListController($scope, $state, taskService) {
         var vmList = this;
 
         // Methods
-        vmList.createTask = createTask;
         vmList.startTiming = startTiming;
 
         // Properties
         vmList.tasks = [];
-        vmList.task = {};
-        vmList.isAddingTask = false;
+
+        $scope.$on('task:created', function(event, task) {
+            vmList.tasks.push(task);
+        });
+
+        $scope.$on('task:updated', function(event, task) {
+            var id = task._id,
+                i = 0;
+
+            while (i < vmList.tasks.length) {
+                if (vmList.tasks[i]._id === id) {
+                    vmList.tasks.splice(i, 1, task);
+                    break;
+                }
+                i++;
+            }
+        });
 
         (function activate() {
             // optionally do:
@@ -28,14 +42,6 @@
 
         })();
 
-        function createTask() {
-            return taskService.createTask(vmList.task)
-                .then(function(res) {
-                    vmList.tasks.push(res.data);
-                    vmList.task = {};
-                });
-        }
-
         function getAllTasks() {
             return taskService.getAllTasks()
                 .then(function(data) {
@@ -43,23 +49,10 @@
                 });
         }
 
-        $scope.$on('task-removed', function(event, id) {
-            var i = 0;
-            while(i < vmList.tasks.length) {
-                if (vmList.tasks[i]._id === id) {
-                    vmList.tasks.splice(i, 1);
-                    break;
-                }
-                i++;
-            }
-        });
-
         function startTiming(task) {
             $state.go('main.countdown', {
                 task: task
             });
         }
-
-
     }
 })();

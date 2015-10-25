@@ -1,0 +1,37 @@
+<div class="row" ng-class="{'card-panel': !vmTaskForm.isEditMode}">
+    <form novalidate ng-submit="vmTaskForm.save(vmTaskForm.task)">
+            <!-- Title Field -->
+            <div  class="input-field col s12 m5"
+                  ng-class="{'m5': !vmTaskForm.isEditMode, 
+                            'm6': vmTaskForm.isEditMode}"
+                >
+                <input  id="task_title" 
+                        floating-label="Title"
+                        ng-model="vmTaskForm.task.title"
+                        type="text"
+                        >
+            </div>
+            <!-- Description Field -->
+            <div class="input-field col s12 m5"
+                 ng-class="{'m5': !vmTaskForm.isEditMode, 
+                            'm6': vmTaskForm.isEditMode}"
+                >
+                <input  id="task_description" 
+                        floating-label="Description"
+                        ng-model="vmTaskForm.task.description" 
+                        type="text" 
+                        >
+            </div>
+            <!-- Add button -->
+            <div class="input-field col s12 m2">
+                <button class="btn red"
+                        ng-click="vmTaskForm.save()" 
+                        ng-disabled="!vmTaskForm.task.title"
+                        ng-if="!vmTaskForm.isEditMode"
+                        type="submit" 
+                        >
+                    Add
+                </button>
+            </div>
+    </form>
+</div>
