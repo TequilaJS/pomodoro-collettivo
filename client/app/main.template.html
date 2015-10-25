@@ -1,11 +1,19 @@
 <tabset class="row grey darken-4">
 
-    <tab class="col s6 white" active="vmMain.listActive" ng-click="$state.go('main.list')">
+    <tab active="vmMain.listActive"
+        class="col s6 white" 
+        ng-click="$state.go('main.list')"
+        >
         <tab-heading class="teal-text">List</tab-heading>
     </tab>
-    <tab class="col s6 white" active="vmMain.countdownActive" ng-click="$state.go('main.countdown')"> 
+
+    <tab active="vmMain.countdownActive" 
+        class="col s6 white"  
+        ng-click="$state.go('main.countdown')"
+        >
         <tab-heading class="teal-text">Timer</tab-heading>
     </tab>
     
+    <!-- This is where the states will be rendered -->
     <div class="col s12" ui-view></div>
 </tabset>

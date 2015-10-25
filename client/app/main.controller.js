@@ -10,10 +10,10 @@
     function MainController($scope, $state, $timeout) {
         var vmMain = this;
         
-        vmMain.currentTask = "Current task name goes here.";
-
         (function activate() {
-            // vmMain.displayView = localStorage.getItem('defaultTab');
+            /*
+                Exposing the $state service to the view
+            */
             $scope.$state  = $state;
         })();
 

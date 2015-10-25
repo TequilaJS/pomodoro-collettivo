@@ -11,6 +11,7 @@
         var vmModal = this;
 
         // Preventing the list to display the changes immediately
+        // while typing in the new values
         vmModal.task = angular.copy(task);
 
         (function() {

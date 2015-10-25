@@ -1,0 +1,15 @@
+<!-- using the stop-event directive to fix an issue with modals and
+     touch devices -->
+<div class="modal-content" stop-event="touchend">
+    <pc-task-form task="vmModal.task"></pc-task-form>
+</div>
+ <div class="modal-footer">
+    <button class="btn red" 
+            ng-click="vmModal.cancel()"
+            type="button"  
+           >Cancel</button>
+    <button class="btn teal" 
+            ng-click="vmModal.save()"
+            type="button"  
+           >Save</button>
+ </div>

@@ -91,3 +91,10 @@ path {
 .tabs .indicator {
     background: #26a69a;    
 }
+
+/* Fixing a blank space that was created
+  when the keyboard on android appears.
+*/
+.lean-overlay {
+  top: 0;
+}

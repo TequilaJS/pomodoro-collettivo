@@ -8,7 +8,12 @@
 	taskService.$inject = ['$http', '$q'];
 
 	function taskService($http, $q) {
+
 		var baseUrl = '/api',
+
+			/* Accessible Members Up Top
+				See https://github.com/johnpapa/angular-styleguide#style-y052
+			*/
 			service = {
 				checkTask: checkTask,
 				createTask: createTask,

@@ -21,13 +21,17 @@
             restrict: 'E',
             require: 'pcTaskList',
             scope: {},
-            templateUrl: './app/list/task-list.template.html'
+            templateUrl: './app/list/directives/task-list/task-list.template.html'
         };
         return directive;
 
         function link(scope, element, attrs, vmTaskList) {
 
-            // event subscriptions
+            /*
+                Another way to subscribte to this event is
+                by injecting the $scope service into the TaskListController, 
+                and listening on the event there.
+            */
             scope.$on('task:check', function(event, task) {
                 vmTaskList.checkTask(task);
             });
@@ -35,6 +39,12 @@
         }
     }
 
+    /*
+        Notice the heavy use of the controller here. 
+
+        The documentation advises to use a controller when exposing an
+        API to other directives.
+    */
     TaskListController.$inject  = ['taskService'];
 
     function TaskListController(taskService) {

@@ -6,10 +6,14 @@
                             'm6': vmTaskForm.isEditMode}"
                 >
                 <input  id="task_title" 
-                        floating-label="Title"
+                        ng-blur="vmTaskForm.titleFocused = false"
+                        ng-focus="vmTaskForm.titleFocused = true"
                         ng-model="vmTaskForm.task.title"
                         type="text"
                         >
+                <label for="task_title"
+                        ng-class="{'active': vmTaskForm.titleFocused || vmTaskForm.task.title}"
+                        >Title</label>
             </div>
             <!-- Description Field -->
             <div class="input-field col s12 m5"
@@ -17,10 +21,14 @@
                             'm6': vmTaskForm.isEditMode}"
                 >
                 <input  id="task_description" 
-                        floating-label="Description"
+                        ng-blur="vmTaskForm.descriptionFocused = false"
+                        ng-focus="vmTaskForm.descriptionFocused = true"
                         ng-model="vmTaskForm.task.description" 
                         type="text" 
                         >
+                 <label for="task_description"
+                        ng-class="{'active': vmTaskForm.descriptionFocused || vmTaskForm.task.description}"
+                        >Description</label>
             </div>
             <!-- Add button -->
             <div class="input-field col s12 m2">

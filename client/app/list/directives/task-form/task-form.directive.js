@@ -18,7 +18,7 @@
             link: link,
             restrict: 'E',
             scope: true,
-            templateUrl: './app/list/task-form.directive.html'
+            templateUrl: './app/list/directives/task-form/task-form.directive.html'
         };
         return directive;
 
