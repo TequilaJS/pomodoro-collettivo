@@ -16,8 +16,26 @@ module.exports = {
         ],
         exclude     : [
             /jquery/,
-            /bootstrap.js/,
-            /moment\/momentjs/
+            /bootstrap.js/
         ]
+    },
+
+    templatesConf: {
+        module: 'pomodoro',
+        root: 'app/',
+        standalone: false
+    },
+    injectConf: {
+        dev: {
+            files: [
+                'client/app/**/*.js',
+                'client/assets/styles/*.css',
+                'client/assets/bower/ng-materialize/dist/ng-materialize.css',
+                'client/assets/bower/waves/dist/waves.css',
+                'client/assets/bower/animate.css/animate.css'
+            ]
+        }
     }
+
+
 };
