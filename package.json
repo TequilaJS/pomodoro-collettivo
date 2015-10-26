@@ -2,7 +2,7 @@
   "name": "pomodoro-colletivo",
   "version": "0.0.1",
   "description": "A multi-user / real-time pomodoro for teams.",
-  "license": {
+  "licenses": {
     "type": "Apache-2.0",
     "url": "http://opensource.org/licenses/apache2.0.php"
   },
@@ -13,6 +13,7 @@
   "dependencies": {
     "body-parser": "^1.13.3",
     "express": "^4.13.3",
+    "gulp": "^3.9.0",
     "mongoose": "^4.1.5",
     "morgan": "^1.6.1"
   },
@@ -20,19 +21,17 @@
     "install": "bower install"
   },
   "devDependencies": {
-    "del": "^2.0.2",
-    "gulp": "^3.9.0",
-    "gulp-autoprefixer": "^3.1.0",
-    "gulp-cache": "^0.3.0",
+    "gulp-angular-templatecache": "^1.8.0",
     "gulp-concat": "^2.6.0",
-    "gulp-imagemin": "^2.3.0",
+    "gulp-debug": "^2.1.2",
+    "gulp-inject": "^3.0.0",
     "gulp-jshint": "^1.11.2",
-    "gulp-less": "^3.0.3",
-    "gulp-livereload": "^3.8.1",
     "gulp-load-plugins": "^1.0.0",
     "gulp-minify-css": "^1.2.1",
-    "gulp-notify": "^2.2.0",
+    "gulp-nodemon": "^2.0.4",
     "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^1.4.2"
+    "gulp-task-listing": "^1.0.1",
+    "gulp-uglify": "^1.4.2",
+    "wiredep": "^2.2.2"
   }
 }

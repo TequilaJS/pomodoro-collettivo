@@ -6,32 +6,22 @@
         <!--Import Google Icon Font-->
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!--Import materialize.css-->
-        <!-- <link type="text/css" rel="stylesheet" href="assets/bower/Materialize/dist/css/materialize.min.css"  media="screen,projection"/> -->
+        
+        <!-- inject:css -->
+        <link rel="stylesheet" href="assets/styles/app.css">
+        <link rel="stylesheet" href="assets/bower/ng-materialize/dist/ng-materialize.css">
+        <link rel="stylesheet" href="assets/bower/waves/dist/waves.css">
+        <link rel="stylesheet" href="assets/bower/animate.css">
+        <!-- endinject -->
+        
+         <!--<link type="text/css" rel="stylesheet" href="assets/bower/Materialize/dist/css/materialize.min.css"  media="screen,projection"/>-->
         <link rel="stylesheet" href="assets/bower/ng-materialize/dist/ng-materialize.css">
         <link rel="stylesheet" href="assets/bower/waves/dist/waves.css">
         <link rel="stylesheet" href="assets/bower/animate.css/animate.css">
+
         <link href="assets/styles/app.css" rel="stylesheet">
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-        <link rel="apple-touch-icon" sizes="57x57" href="assets/images/app-icon/apple-icon-57x57.png">
-        <link rel="apple-touch-icon" sizes="60x60" href="assets/images/app-icon/apple-icon-60x60.png">
-        <link rel="apple-touch-icon" sizes="72x72" href="assets/images/app-icon/apple-icon-72x72.png">
-        <link rel="apple-touch-icon" sizes="76x76" href="assets/images/app-icon/apple-icon-76x76.png">
-        <link rel="apple-touch-icon" sizes="114x114" href="assets/images/app-icon/apple-icon-114x114.png">
-        <link rel="apple-touch-icon" sizes="120x120" href="assets/images/app-icon/apple-icon-120x120.png">
-        <link rel="apple-touch-icon" sizes="144x144" href="assets/images/app-icon/apple-icon-144x144.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="assets/images/app-icon/apple-icon-152x152.png">
-        <link rel="apple-touch-icon" sizes="180x180" href="assets/images/app-icon/apple-icon-180x180.png">
-        <link rel="icon" type="image/png" sizes="192x192"  href="assets/images/app-icon/android-icon-192x192.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="assets/images/app-icon/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="96x96" href="assets/images/app-icon/favicon-96x96.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="assets/images/app-icon/favicon-16x16.png">
-        <link rel="manifest" href="assets/images/app-icon/manifest.json">
-        <meta name="msapplication-TileColor" content="#ffffff">
-        <meta name="msapplication-TileImage" content="assets/images/app-icon/ms-icon-144x144.png">
-        <meta name="theme-color" content="#ffffff">
-
         <base href="/">
     </head>
 
@@ -39,34 +29,51 @@
         
         <div ui-view></div>
 
-        <!-- Vendor code -->
+
+        <!-- bower:js -->
         <script src="assets/bower/angular/angular.js"></script>
-        <script src="assets/bower/angular-animate/angular-animate.js"></script>
-        <script src="assets/bower/angular-timer/dist/angular-timer.min.js"></script>
-        <script src="assets/bower/angular-ui-router/release/angular-ui-router.js"></script>
-        <script src="assets/bower/angular-touch/angular-touch.js"></script>
+        <script src="assets/bower/angular-svg-round-progressbar/build/roundProgress.min.js"></script>
         <script src="assets/bower/momentjs/moment.js"></script>
         <script src="assets/bower/humanize-duration/humanize-duration.js"></script>
-        <script src="assets/bower/waves/dist/waves.js"></script>
+        <script src="assets/bower/angular-timer/dist/angular-timer.js"></script>
+        <script src="assets/bower/angular-touch/angular-touch.js"></script>
+        <script src="assets/bower/angular-ui-router/release/angular-ui-router.js"></script>
+        <script src="assets/bower/lodash/lodash.js"></script>
+        <script src="assets/bower/angular-animate/angular-animate.js"></script>
+        <script src="assets/bower/waves/dist/waves.min.js"></script>
         <script src="assets/bower/ng-materialize/dist/ng-materialize.js"></script>
         <script src="assets/bower/ui-router-extras/release/ct-ui-router-extras.js"></script>
-        <script src="assets/bower/angular-svg-round-progressbar/build/roundProgress.min.js"></script>
-        <script src="assets/bower/lodash/lodash.js"></script>
-    
-        <!-- App files -->
+        <!-- endbower -->
+
+
+        <!-- inject:js -->
         <script src="app/app.js"></script>
         <script src="app/main.controller.js"></script>
-        
         <script src="app/blocks/tasks.service.js"></script>
-
+        <script src="app/list/list.controller.js"></script>
         <script src="app/countdown/countdown.controller.js"></script>
         <script src="app/countdown/COUNTDOWN_TYPES.constant.js"></script>
-    
-        <script src="app/list/list.controller.js"></script>
-        <script src="app/list/directives/task/task.directive.js"></script>
         <script src="app/list/directives/task/edit-task-modal.controller.js"></script>
         <script src="app/list/directives/task/stop-event.directive.js"></script>
+        <script src="app/list/directives/task/task.directive.js"></script>
         <script src="app/list/directives/task-form/task-form.directive.js"></script>
         <script src="app/list/directives/task-list/task-list-directive.js"></script>
+        <!-- endinject -->
+
+        <!--&lt;!&ndash; App files &ndash;&gt;-->
+        <!--<script src="app/app.js"></script>-->
+        <!--<script src="app/main.controller.js"></script>-->
+        <!-- -->
+        <!--<script src="app/blocks/about/about.directive.js"></script>-->
+        <!--<script src="app/blocks/tasks.service.js"></script>-->
+
+        <!--<script src="app/countdown/countdown.controller.js"></script>-->
+        <!--<script src="app/countdownStatus.service.js"></script>-->
+        <!--<script src="app/countdown/COUNTDOWN_TYPES.constant.js"></script>-->
+
+        <!--<script src="app/list/list.controller.js"></script>-->
+        <!--<script src="app/list/task.controller.js"></script>-->
+        <!--<script src="app/list/task.directive.js"></script>-->
+        
     </body>
 </html>
