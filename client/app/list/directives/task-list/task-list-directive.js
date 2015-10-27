@@ -19,7 +19,6 @@
             controllerAs: 'vmTaskList',
             link: link,
             restrict: 'E',
-            require: 'pcTaskList',
             scope: {},
             templateUrl: './app/list/directives/task-list/task-list.template.html'
         };
