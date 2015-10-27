@@ -21,6 +21,7 @@
     "install": "bower install"
   },
   "devDependencies": {
+    "browser-sync": "^2.9.11",
     "del": "^2.0.2",
     "gulp-angular-templatecache": "^1.8.0",
     "gulp-concat": "^2.6.0",

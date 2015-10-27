@@ -12,8 +12,8 @@ gulp.task("default", ['help']);
  * create a distribution-able client build
  */
 
-gulp.task("build", ['clean', 'min-app', ], function(){
-    console.log("done");
+gulp.task("build", ['clean:dist', 'min:app', 'min:bower'], function(){
+    console.log("build has been completed");
 });
 
 /**
@@ -21,10 +21,8 @@ gulp.task("build", ['clean', 'min-app', ], function(){
  * run continuous watch tasks on file changes
  */
 
-gulp.task("serve:dev", ['wiredep:dev', 'inject:dev'], function(){
-    return gulp
-        .src("./client/")
-        .pipe(gulp.dest('./dist/'));
+gulp.task("serve:dev", ['wiredep:dev', 'inject:dev', 'browser-sync'], function(){
+    console.log("you've been served")
 });
 
 /**
@@ -55,12 +53,10 @@ gulp.task("min:app", ['jshint'], function(){
 
 // minify dependencies
 gulp.task("min:bower", function(){
-    return gulp
+     gulp
         .src('./client/assets/bower/**/*.js')
-        .pipe($.concat("lib.js"))
-        .pipe(gulp.dest("./dist/app"))
-        .pipe($.rename('lib.min.js'))
-        .pipe($.uglify())
+        .pipe($.concat("lib.min.js"))
+        .pipe($.debug($.uglify()))
         .pipe(gulp.dest('./dist'))
 });
 
@@ -86,8 +82,12 @@ gulp.task("build:templateCache", function(){
 gulp.task("clean:dist", function(){
     var del = require("del");
     del(['dist/**/*', '!dist/']);
-})
+});
 
+gulp.task("clean:bower", function(){
+    var del = require("del");
+    del(['client/assets/bower/**/*', '!client/assets/bower/']);
+});
 
 
 // wiredep  - inject bower dependencies to the dev client
@@ -119,6 +119,30 @@ gulp.task('inject:dist', function(){
     return target.pipe($.inject(source, {relative: true}))
         .pipe(gulp.dest('dist/'))
 });
+
+// browser sync
+gulp.task('browser-sync',['nodemon'], function(){
+    $.browserSync = require('browser-sync');
+    $.browserSync.init(null, {
+        proxy: 'http://localhost:3000',
+        files: ['client/**/*.*'],
+        browser: 'google chrome',
+        port: 3000
+    });
+});
+
+// nodemon
+gulp.task('nodemon', function(cb){
+    var started = false;
+    return $.nodemon({
+        script: './server.js'
+    }).on('start', function(){
+        if(!started) {
+            cb();
+            started = true;
+        }
+    })
+})
 
 gulp.task("html", function(){
     var assets = $.useref.assets({searchPath: ['client', '.']});
