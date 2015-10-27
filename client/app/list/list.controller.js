@@ -20,6 +20,10 @@
             vmList.tasks.push(task);
         });
 
+        $scope.$on('task:startedTiming', function (event, task) {
+            startTiming(task);
+        });
+
         $scope.$on('task:updated', function(event, task) {
             var id = task._id,
                 i = 0;

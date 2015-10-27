@@ -42,9 +42,8 @@
 
             // This is ugly, I gotta say :(
             $scope.$on('timer-tick', function(event, value) {
-                $scope.$apply(function() {
                     vmCountdown.elapsedTime = vmCountdown.currentTimer.duration - (value.millis / 1000);
-                });
+                    $scope.$apply();
             });
         })();
 

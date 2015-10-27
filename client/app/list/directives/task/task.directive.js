@@ -64,8 +64,9 @@
             */
             vmTask.checkTask = checkTask; 
             vmTask.deleteTask = deleteTask;
-            vmTask.swipeCheckTask = swipeCheckTask;
             vmTask.openModal = openModal;
+            vmTask.startTiming = startTiming;
+            vmTask.swipeCheckTask = swipeCheckTask;
 
             function checkTask() {
                 vmTaskList.checkTask(vmTask.task);
@@ -110,6 +111,10 @@
                     templateUrl: './app/list/directives/task/edit-task-modal.html',
                 });
 
+            }
+
+            function startTiming() {
+                scope.$emit('task:startedTiming', vmTask.task);
             }
 
             /*
