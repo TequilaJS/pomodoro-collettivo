@@ -9,7 +9,7 @@ bower_components
 # node and bower dependencies
 node_modules
 client/assets/bower
-
+dist
 # mac crappy indexers
 .DS_Store
 
