@@ -1,0 +1,111 @@
+body {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.container {
+    min-height: 850px;
+}
+
+.task-item.ng-enter {
+  -webkit-animation: bounceInLeft 1s;
+  -moz-animation: bounceInLeft 1s;
+  -ms-animation: bounceInLeft 1s;
+  animation: bounceInLeft 1s;
+}
+
+.task-item.ng-leave {
+  -webkit-animation: bounceOutRight 1s;
+  -moz-animation: bounceOutRight 1s;
+  -ms-animation: bounceOutRight 1s;
+  animation: bounceOutRight 1s;
+}
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+    display: none !important;
+}
+
+.task-item > button {
+    margin-top: -5px;
+}
+
+/* task list styles */
+
+#tasklist-view a {
+	cursor: pointer;
+}
+
+#tasklist-view a i.material-icons {
+	transition: all 0.5s;
+}
+
+#tasklist-view a i.material-icons:hover {
+	color: red;
+    position: relative;
+    margin:20px auto;
+}
+
+/*Styles for the countdown*/
+
+#current-task {
+  cursor: pointer;
+}
+
+#progress {
+  transition: background 0.3s;
+  /*animation: flash 1s;*/
+}
+
+.progress-wrapper {
+    position: relative;
+    margin: 20px auto;
+    max-width: 450px;
+}
+
+.progress-text {
+    bottom: auto;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    transition: font 0.3s;
+    position: absolute;
+    color: #eaeaea;
+    font-weight: 100;
+    line-height: 1;
+    top: 50%;
+}
+
+.progress-text span {
+     font-size: 4em;
+}
+
+path {
+    transition: stroke 0.4s;
+}
+
+@media (min-width: 460px) { 
+    .progress-text span {
+        font-size: 7em;
+    }
+}
+
+@media (min-width: 640px) { 
+    .progress-text span {
+        font-size: 9em;
+    }
+   
+}
+
+/*#mini-progress {
+    padding-top: 10px;
+}*/
+
+.tabs .indicator {
+    background: #26a69a;    
+}
+
+/* Fixing a blank space that was created
+  when the keyboard on android appears.
+*/
+.lean-overlay {
+  top: 0;
+}

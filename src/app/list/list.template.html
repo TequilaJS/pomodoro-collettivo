@@ -1,0 +1,26 @@
+<!--
+    list.template.html
+    Task list view template
+-->
+
+<div class="container" id="tasklist-view">
+	
+	<!-- task list |  Add a new task-->
+	
+	<pc-task-form save="vmList.save()">
+	</pc-task-form>
+
+	<!-- task list | List of tasks yet to complete  -->
+
+	<pc-task-list 	filter="{'status': false}"
+					header="{color: 'red', title: 'To Do'}"
+					tasks="vmList.tasks"
+					></pc-task-list>
+
+	<!-- task list | List of tasks already completed -->
+	<pc-task-list 	filter="{'status': true}"
+					header="{color: 'teal', title: 'Done'}"
+					tasks="vmList.tasks"
+					></pc-task-list>
+
+</div>

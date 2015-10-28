@@ -1,0 +1,42 @@
+{
+  "name": "pomodoro-colletivo",
+  "version": "0.0.1",
+  "description": "A multi-user / real-time pomodoro for teams.",
+  "licenses": {
+    "type": "Apache-2.0",
+    "url": "http://opensource.org/licenses/apache2.0.php"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TequilaJS/pomodoro-collettivo.git"
+  },
+  "dependencies": {
+    "body-parser": "^1.13.3",
+    "express": "^4.13.3",
+    "gulp": "^3.9.0",
+    "mongoose": "^4.1.5",
+    "morgan": "^1.6.1"
+  },
+  "scripts": {
+    "install": "bower install"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.9.11",
+    "del": "^2.0.2",
+    "gulp-angular-templatecache": "^1.8.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-debug": "^2.1.2",
+    "gulp-if": "^2.0.0",
+    "gulp-inject": "^3.0.0",
+    "gulp-jshint": "^1.11.2",
+    "gulp-load-plugins": "^1.0.0",
+    "gulp-minify-css": "^1.2.1",
+    "gulp-nodemon": "^2.0.4",
+    "gulp-rename": "^1.2.2",
+    "gulp-task-listing": "^1.0.1",
+    "gulp-uglify": "^1.4.2",
+    "jshint-stylish": "^2.0.1",
+    "stream-series": "^0.1.1",
+    "wiredep": "^2.2.2"
+  }
+}

@@ -1,3 +1,17 @@
 pomodoro-collettivo.sublime-project
 pomodoro-collettivo.sublime-workspace
 bower_components
+
+# idea projects
+.idea
+*.iml
+
+# node and bower dependencies
+node_modules
+client/assets/bower
+dist
+# mac crappy indexers
+.DS_Store
+
+# vscode projects
+.vscode

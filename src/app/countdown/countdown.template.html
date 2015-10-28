@@ -1,0 +1,113 @@
+<!--
+    countdown.template.html
+    Task list view template
+-->
+<div class="container" id="countdown-view">
+	
+	<!-- This is where the current task title is going to be displayed -->
+	<div id="current-task" class="row card-panel white valign-wrapper" ui-sref="main.list">
+		<div class="col s8 m12 l12 valign">
+			<h4 class="red-text flow-text center-align truncate" ng-if="vmCountdown.currentTask">{{vmCountdown.currentTask.title}}</h4>
+		</div>
+		<!-- If there were not enough space to display the full countdown
+			timer, then a simpler version will be at the right side  -->
+		<div class="col s4 hide-on-med-and-up right valign" >
+			<div
+				id="mini-progress"
+				round-progress
+				max="vmCountdown.currentTimer.duration"
+				current="vmCountdown.elapsedTime"
+				radius="25"
+				bgcolor="{{vmCountdown.currentTimer.color}}"
+				color="#fff"
+				clockwise="false"
+				stroke="4"
+				>
+			</div>
+		</div>
+	</div>
+
+	<!-- This is the "control panel" for the timer, 
+		the start/stop button is presented here as well as the 
+		current count of pomodoros dedicated to the task at hand.
+		Also, the user can mute/unmute the ticker sound -->
+	<div class="row white card-panel">
+
+	    <div class="col s12 m4 left-align">
+	    	<h6>Currently timing on: {{vmCountdown.currentTimer.name}}</h6>
+			<div class="switch">
+				<span class="black-text">Ticker sound:</span>
+				<br>
+				<label>
+					Off	<input 	id="tickerSound"
+					type="checkbox"
+					ng-model="vmCountdown.tickerSoundOn"
+					ng-change="vmCountdown.toggleTickerMute()">
+					<span class="lever"></span> On
+				</label>
+			</div>
+	    </div>
+
+		<div class="col s12 hide-on-med-and-up"><p></p></div>
+	   
+	    <!-- Button to start/reset the countdown -->
+	    <div class="col s12 m4 center-align">
+			<button type="button" 
+					class="btn-floating btn-large waves-effect waves teal"
+					ng-disabled="vmCountdown.isTicking"
+					ng-click="vmCountdown.startTimer()"
+					>
+					<i 	class="material-icons">play_arrow</i>
+			</button> 
+			<br>
+			<br>
+			<button type="button" 
+					class="btn waves-effect waves red"
+					ng-click="vmCountdown.stopTimer()"	
+					>
+					Reset
+			</button>
+			
+			
+	    </div>
+		
+		<div class="col s12 hide-on-med-and-up"><p></p></div>	
+	  
+	    <!-- Displays how many pomodoros have been dedicated to a task -->
+	    <div class="col s12 m4 right-align">
+			<img src="../../assets/svg/pomodoro.svg" alt="">
+	    	<div>Current session: {{vmCountdown.currentCycleCount}} 
+	    		<br> 
+	    		Total invested: {{vmCountdown.currentTask.elapsedPomodoros}}</div>
+	    </div>
+  	</div>
+
+	<!-- The full countdown timer, inside a panel which will be displayed
+		only when there is enough space to do so -->
+	<div id="progress" class="row card-panel {{vmCountdown.currentTimer.materialColor}}">
+
+		<!-- See: https://github.com/crisbeto/angular-svg-round-progressbar/blob/master/build/index.html -->
+		<div class="valign-wrapper progress-wrapper">
+			
+			<!-- This will be displayed in the center of the progress bar -->
+			<div class="valign  progress-text">
+				<timer  interval="1000"
+				countdown="vmCountdown.currentTimer.duration"
+				auto-start="false"
+				finish-callback="vmCountdown.ringAlarm()">{{mminutes}}:{{sseconds}}</timer>
+			</div>
+			
+			<!-- The actual progress bar -->
+			<div
+				round-progress
+				max="vmCountdown.currentTimer.duration"
+				current="vmCountdown.elapsedTime"
+				clockwise="false"
+				responsive="true"
+				color="#eaeaea"
+				bgcolor="{{vmCountdown.currentTimer.color}}"
+				>
+			</div>
+		</div>
+	</div>
+</div>
