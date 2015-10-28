@@ -28,11 +28,11 @@ server.use( cors );
 
 // calling api and defining static served content
 api(server);
-server.use( "/", express.static ( __dirname + '/client' ) );
+server.use( "/", express.static ( __dirname + '/src' ) );
 
 server.all('/*', function(req, res, next) {
     // Just send the index.html for other files to support HTML5Mode
-    res.sendFile('index.html', { root: __dirname + '/client' });
+    res.sendFile('index.html', { root: __dirname + '/src' });
 });
 
 // telling our server to listen on the specified ports
